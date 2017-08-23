@@ -1,0 +1,61 @@
+.btn {
+	display: inline-block;
+	vertical-align: middle;
+	padding: 0 20px;
+	text-transform: uppercase;
+	text-decoration: none;
+	cursor: pointer;
+	border: none;
+	outline: none;
+	border-radius: 15px;
+	font-family: $mainFontBold;
+	transition: all .2s ease;
+	height: 30px;
+	line-height: 30px;
+	&.btn-primary {
+		background-color: $mainColor;
+		color: white;
+		&:hover {
+			opacity: .8;
+		}
+	}
+	&.btn-border {
+		background-color: transparent;
+		border: solid 1px $mainColor;
+		color: $mainColor;
+		line-height: 28px;
+		&:hover {
+			opacity: .8;
+		}
+		.icon {
+			opacity: .5;
+		}
+	}
+	&.btn-border-header {
+		background-color: transparent;
+		border: solid 1px $headerTextColor;
+		color: $headerTextColor;
+		line-height: 28px;
+		&:hover {
+			border-color: $headerActiveTextColor;
+			color: $headerActiveTextColor;
+		}
+	}
+	.icon {
+		margin: 0 2px;
+	}
+}
+
+.restore-defaults-btn {
+	margin: 30px;
+	padding: 5px;
+	cursor: pointer;
+	font-family: $mainFontBold;
+	color: $restoreColor;
+	text-transform: uppercase;
+	opacity: .5;
+	transition: opacity .2s ease;
+	&:hover {
+		opacity: 1;
+	}
+}

@@ -1,0 +1,267 @@
+.compare-page {
+	// header elements
+	.header-wrap {
+		.logo {
+			max-width: calc(50% - 250px);
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			overflow: hidden;
+		}
+		.nav {
+			margin: 0 3.5%;
+		}
+		.tabs,
+		.action-btns {
+			display: none;
+		}
+	}
+
+	// compare graphs tabs
+	.compare-tabs {
+		position: absolute;
+		display: block;
+		left: calc(50% - 6px);
+		.header-dropdown {
+			position: absolute;
+			top: -8px;
+			&:nth-of-type(2n+1) {
+				right: 20px;
+			}
+			&:nth-of-type(2n+2) {
+				left: 20px;
+			}
+		}
+		.dropdown-content {
+			margin-left: -90px;
+			li {
+				height: 45px;
+			}
+			.title {
+				padding: 0;
+				label {
+					display: block;
+					padding: 8px 30px;
+					text-align: left;
+					color: $mainColor;
+					cursor: pointer;
+					transition: opacity .2s ease;
+					&:hover {
+						opacity: .8;
+					}
+				}
+				input {
+					display: none;
+					&:checked + label:after {
+						content: '';
+						width: 19px;
+						height: 9px;
+						display: inline-block;
+						margin-bottom: 3px;
+						margin-left: 10px;
+						transform: rotate(-45deg);
+						border-left: solid 3px $mainColor;
+						border-bottom: solid 3px $mainColor;
+					}
+				}
+			}
+			.table {
+				height: auto;
+				max-height: 330px;
+				overflow: auto;
+				padding: 0 20px;
+				color: $textColor;
+				font-family: $mainFont;
+			}
+		}
+	}
+	.compare-title {
+		padding: 0 10px;
+		margin-left: auto;
+		color: white;
+		background: $compareColor;
+		.icon {
+			margin: -1px 5px 0;
+		}
+	}
+	.icon-compare {
+		opacity: .5;
+	}
+
+	// top area centered navigation
+	.top-area {
+		position: relative;
+		// separation line
+		&:before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 50%;
+			height: 100%;
+			border-left: solid 1px $headerActiveTextColor;
+		}
+		.graphs-wrap {
+			display: flex;
+			justify-content: center;
+			&:nth-of-type(2n+1) {
+				padding-right: 50px;
+			}
+			&:nth-of-type(2n) {
+				padding-left: 50px;
+			}
+		}
+		.delta-col label:after {
+			content: none;
+		}
+	}
+	.charts-nav {
+		display: block;
+		width: 80px;
+		top: 35px;
+		left: 50%;
+		bottom: auto;
+		transform: translateX(-50%);
+		padding: 10px 0;
+		background: $topAreaBgColor;
+		.nav-item {
+			width: 100%;
+			margin: 0 0 10px;
+			text-transform: uppercase;
+		}
+	}
+	.graphs-wrap {
+		position: relative;
+		.graph-btns {
+			position: absolute;
+			right: 30px;
+			bottom: 10px;
+			text-align: right;
+			a {
+				display: block;
+				line-height: 35px;
+				color: $headerTextColor;
+				transition: color .2s ease;
+				&:hover {
+					opacity: 1;
+					color: $headerActiveTextColor;
+					.icon-pdf {
+						opacity: 1;
+					}
+				}
+			}
+			.icon-pdf {
+				opacity: .5;
+				transition: opacity .2s ease;
+			}
+		}
+		&:nth-of-type(2) {
+			.graph-btns {
+				right: 0;
+			}
+		}
+	}
+
+	// params wrappers/columns
+	.sctollable-area .graph-params:first-of-type  {
+		border-right: solid 1px $mainColor;
+	}
+	.graph-params {
+		&:first-of-type {
+			.hold-common {
+				position: relative;
+				&:after {
+					content: '';
+					width: 9px;
+					height: 9px;
+					position: absolute;
+					top: 14px;
+					right: -15px;
+					background: $mainColor;
+					border-radius: 100%;
+				}
+			}
+		}
+		&:nth-of-type(2n+1) {
+			padding-right: 10px;
+		}
+		&:nth-of-type(2n) {
+			padding-left: 10px;
+		}
+	}
+}
+
+
+// sections with 2 columns
+.compare-page,
+.sensitivity-view {
+	.section-wrap {
+		>.row {
+			>.col-6 {
+				width: 100%;
+				&:nth-of-type(2n) {
+					padding-left: 0;
+					padding-top: 10px; 
+					border-left: none;
+					border-top: solid 1px #e3e3e3;
+				}
+				&:nth-of-type(2n+1) {
+					padding-right: 0;
+					padding-bottom: 10px; 
+				}
+			}
+		}
+	}
+}
+
+
+@media screen and (max-width: $tView) {
+	.compare-page {
+		.top-area {
+			.graphs-wrap {
+				.ring-chart,
+				.line-chart-el {
+					transform: scale(.8);
+				}
+				.ring-chart {
+					margin: 5px 0 -25px;
+				}
+			}
+	
+			[data-gauges] {
+				width: 257px;
+				height: 257px;
+			}
+		}
+		.editable-item-wrap {
+			flex-wrap: wrap;
+			.name-col {
+				width: 100%;
+				padding: 5px 0 10px;
+			}
+			.slider-col {
+				width: calc(100% - 95px);
+			}	
+		}
+		.locked-items {
+			.editable-item-wrap  {
+				.name-col {
+					width: 100%;
+				}
+				.slider-col {
+					width: calc(100% - 107px);
+				}
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 1050px) {
+	.compare-page .top-area .graphs-wrap {
+		.graph-btns {
+			bottom: 5px;
+			a {
+				display: inline-block;
+				margin-left: 15px;
+			}
+		}
+	}
+}

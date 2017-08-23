@@ -1,0 +1,149 @@
+.top-area {
+	// general style
+	background: $topAreaBgColor;
+	padding: 20px 0 10px;
+	.graphs-details {
+		position: relative;
+		padding-bottom: 25px;
+		width: 100%;
+		align-items: stretch;
+		padding-top: 5px;
+	} // ring charts
+	[data-gauges] {
+		width: 290px;
+		display: flex;
+		justify-content: space-between;
+		flex-wrap: wrap;
+	} // general tables style
+	[data-tables] {
+		width: 420px;
+	}
+	th {
+		font-size: 13px;
+		color: $headerTextColor;
+		padding: 8px 6px;
+		border-bottom: solid 1px $headerTextColor;
+	}
+	td {
+		border-bottom: none;
+		padding: 0 6px;
+	}
+	tbody {
+		color: $headerActiveTextColor;
+		tr {
+			&:nth-of-type(2n) {
+				background: rgba(255, 255, 255, .05);
+			}
+			&.hidden {
+				display: none;
+			}
+		}
+		.hide-input {
+			pointer-events: none;
+		}
+	} // current table style
+	.data-col {
+		width: 70px;
+	}
+	.delta-col {
+		width: 65px;
+		text-align: right;
+		input {
+			display: none;
+		}
+		label {
+			position: relative;
+			padding-right: 20px;
+			color: $holdColor;
+			font-family: $mainFontBold;
+			cursor: pointer;
+			&:not(.hide-input):after {
+				content: '';
+				position: absolute;
+				top: 4px;
+				right: 3px;
+				width: 10px;
+				height: 10px;
+				border: solid 1px $holdColor;
+				border-radius: 100%;
+			}
+		}
+		input:checked+label:after {
+			background: $holdColor;
+		}
+	}
+	.color-col {
+		width: 50px;
+		text-align: center;
+		span {
+			width: 30px;
+			height: 2px;
+			background: currentColor;
+			display: inline-block;
+			vertical-align: middle;
+		}
+	} // table and charts navigation
+	.nav {
+		position: absolute;
+		bottom: 15px;
+		right: 210px;
+		transform: translateX(50%);
+	}
+	.nav-item {
+		display: inline-flex;
+		vertical-align: middle;
+		align-items: center;
+		justify-content: center;
+		width: 30px;
+		height: 30px;
+		cursor: pointer;
+		border-radius: 15px;
+		color: $headerTextColor;
+		background: rgba(0, 0, 0, .15);
+		border: solid 1px rgba(0, 0, 0, .05);
+		transition: all .2s ease;
+		.icon {
+			opacity: .5;
+			transition: opacity .2s ease;
+		}
+		&.active,
+		&:hover {
+			background: transparent;
+			color: $headerActiveTextColor;
+			border-color: $headerActiveTextColor;
+			.icon {
+				opacity: 1;
+			}
+		}
+		&.active {
+			cursor: default;
+		}
+		&+span {
+			margin-left: 10px;
+		}
+		&.gauges-nav {
+			display: none;
+		}
+	}
+}
+
+.top-area-content {
+	min-height: 312px;
+	align-items: stretch;
+}
+
+@media screen and (max-width: $tView) {
+	.top-area {
+		.nav {
+			right: 0;
+			width: 100%;
+			text-align: center;
+			transform: none;
+		}
+		.nav-item.gauges-nav {
+			display: inline-flex;
+			width: 45px;
+			margin-right: 10px;
+		}
+	}
+}

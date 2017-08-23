@@ -1,0 +1,90 @@
+{
+  "chassisInTransitAmounts": {
+    "column": "A",
+    "displayName": "Chassis in transit"
+  },
+  "brakeInstallsAmounts": {
+    "column": "B",
+    "displayName": "Brake Installs"
+  },
+  "paintJobsAmounts": {
+    "column": "C",
+    "displayName": "Paint Jobs"
+  },
+  "annualLightsInstalledAmounts": {
+    "column": "D",
+    "displayName": "Annual Lights Installed"
+  },
+  "engineInstallsAmounts": {
+    "column": "E",
+    "displayName": "Engine Installs"
+  },
+  "annualCarsProducedAmounts": {
+    "column": "F",
+    "displayName": "Annual Cars Produced"
+  },
+  "sedansAmounts": {
+    "column": "G",
+    "displayName": "Sedans"
+  },
+  "sUVsAmounts": {
+    "column": "H",
+    "displayName": "SUVs"
+  },
+  "luxurySUVsAmounts": {
+    "column": "I",
+    "displayName": "Luxury SUVs"
+  },
+  "luxurySedansAmounts": {
+    "column": "J",
+    "displayName": "Luxury Sedans"
+  },
+  "totalCosts": {
+    "column": "K",
+    "displayName": "Total Costs"
+  },
+  "endowmentsCost": {
+    "column": "L",
+    "displayName": "Endowments"
+  },
+  "wiringAndLiningsCost": {
+    "column": "M",
+    "displayName": "Wiring & Linings"
+  },
+  "generatorsCost": {
+    "column": "N",
+    "displayName": "Generators"
+  },
+  "paintingCost": {
+    "column": "O",
+    "displayName": "Painting"
+  },
+  "qcCost": {
+    "column": "P",
+    "displayName": "QC"
+  },
+  "interiorDetailingCost": {
+    "column": "Q",
+    "displayName": "Interior Detailing"
+  },
+  "engineInstallsCosts": {
+    "column": "R",
+    "displayName": "Engine Installs"
+  },
+  "sedanPercent": {
+    "column": "S",
+    "displayName": "Sedan %"
+  },
+  "luxurySedanPercent": {
+    "column": "T",
+    "displayName": "Luxury Sedan %"
+  },
+  "suvPercent": {
+    "column": "U",
+    "displayName": "SUV%"
+  },
+  "luxurySUVPercent": {
+    "column": "V",
+    "displayName": "Luxury SUV %"
+  }
+}

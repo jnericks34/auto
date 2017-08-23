@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Bermuda - Automotive Manufacturing</title>
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="description" content="Bermuda">
+
+	<!-- directive for load the page scripts -->
+	<meta name="page" content="compare">
+
+	<link rel="stylesheet" type="text/css" href="./css/style.css">
+</head>
+<body class="compare-page">
+	<!-- header -->
+	<header class="header-wrap">
+		<div class="content-wrap">
+			<a href="/" class="logo">Net Costs &amp; Contributors</a>
+			<div class="nav">
+				<a href="javascript:;"><span class="icon icon-undo"></span></a>
+				<a href="javascript:;"><span class="icon icon-undo  fa-flip-horizontal"></span></a>
+			</div>
+
+			<!-- graph tabs -->
+			<div class="tabs">
+				<div class="tab-action-btn">Graph 1</div>
+				<div class="tabs-content">
+					<div class="tab active">
+						<span class="title" data-select-graph="graph1">Graph 1</span>
+						<i class="fa fa-times close"></i>
+					</div>
+					<div class="tab">
+						<span class="title" data-select-graph="graph2">Graph 2</span>
+						<i class="fa fa-times close"></i>
+					</div>
+					<span class="add-tab toggle-modal" data-modal="new graph">
+						<span class="icon-wrap"><i class="fa fa-plus"></i></span>
+						<span class="mobile-item-inline">Add new</span>
+					</span>
+				</div>
+			</div>
+			<!-- compare graph tabs -->
+			<div class="compare-tabs">
+				<div class="header-dropdown" data-dd-select-graph1></div>
+				<span class="icon icon-compare"></span>
+				<div class="header-dropdown" data-dd-select-graph2></div>
+			</div>
+			<a  href="/" class="btn default-btn compare-title">
+				<span class="icon icon-close xs"></span>
+				Compare
+				<span class="icon icon-compare"></span>
+			</a>
+
+			<!-- hrader right buttons -->
+			<div class="action-btns">
+				<div class="header-dropdown actions-dropdown">
+					<span class="header-dropdown-btn">Actions</span>
+					<ul class="dropdown-content">
+						<li class="title disabled">
+							<span>Active Graph 1</span>
+						</li>
+						<li>
+							<a href="javascript:;" class="toggle-modal" data-modal="load">Load</a>
+						</li>
+						<li>
+							<a href="javascript:;" class="toggle-modal" data-modal="save">Save</a>
+						</li>
+						<li>
+							<a href="javascript:;" class="toggle-modal" data-modal="export">Pdf <span class="icon icon-pdf"></span></a>
+						</li>
+						<li>
+							<div class="btn btn-border" data-hold-values>
+								Hold values <span class="icon icon-triangle"></span>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<a href="/compare" class="btn btn-border-header compare-btn"><span class="icon icon-compare"></span></a>
+			</div>
+		</div>
+	</header>
+
+	<!-- charts -->
+	<div class="top-area">
+		<div class="content-wrap">
+			<div class="top-area-content row">
+
+				<!-- charts for first graph -->
+				<div class="col-6 graphs-wrap" data-graph-tab="g1">
+					<div data-graphs data-chart-view="graphs"></div>
+					<div data-gauges data-chart-view="gauges"></div>
+					<div data-tables data-chart-view="tables"></div>
+
+					<div class="graph-btns">
+						<a href="javascript:;" class="save-graph">Save</a>
+						<a href="javascript:;" class="toggle-pdf-modal" data-modal="graph1">Pdf <span class="icon icon-pdf white"></span></a>
+					</div>
+				</div>
+
+				<!-- charts for firsecondst graph -->
+				<div class="col-6 graphs-wrap" data-graph-tab="g2">
+					<div data-graphs data-chart-view="graphs"></div>
+					<div data-gauges data-chart-view="gauges"></div>
+					<div data-tables data-chart-view="tables"></div>
+
+					<div class="graph-btns">
+						<a href="javascript:;" class="save-graph">Save</a>
+						<a href="javascript:;" class="toggle-pdf-modal" data-modal="graph2">Pdf <span class="icon icon-pdf white"></span></a>
+					</div>
+				</div>
+			</div>
+
+			<!-- tables and charts navigation -->
+			<div class="nav charts-nav">
+				<div class="nav-item active" data-toggle-chart="graphs">Graphs</div>
+				<div class="nav-item" data-toggle-chart="gauges">Gauges</div>
+				<div class="nav-item" data-toggle-chart="tables">Tables</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- sliders -->
+	<section class="sctollable-area">
+		<div class="content-wrap">
+			<div class="row">
+				<!-- first graph params -->
+				<div class="col-6 graph-params active" data-graph-tab="g1">
+					<div class="section-wrap">
+						<h3 class="title">Operational Parameters</h3>
+						<div class="row">
+							<div class="col-6" data-operational-costs></div>
+							<div class="col-6" data-operational-rates></div>
+						</div>
+					</div>
+					<div class="section-wrap">
+						<h3 class="title">Tactical Parameters</h3>
+						<div class="locked-items" data-tactical-params></div>
+					</div>
+					<div class="section-wrap">
+						<h3 class="title">Strategic Parameters</h3>
+						<div data-strategic-params></div>
+					</div>
+					<div><div class="restore-defaults-btn" data-restore-data="graph1">Restore TODAY Defaults</div></div>
+				</div>
+
+				<!-- second graph params -->
+				<div class="col-6 graph-params" data-graph-tab="g2">
+					<div class="section-wrap">
+						<h3 class="title">Operational Parameters</h3>
+						<div class="row">
+							<div class="col-6" data-operational-costs></div>
+							<div class="col-6" data-operational-rates></div>
+						</div>
+					</div>
+					<div class="section-wrap">
+						<h3 class="title">Tactical Parameters</h3>
+						<div class="locked-items" data-tactical-params></div>
+					</div>
+					<div class="section-wrap">
+						<h3 class="title">Strategic Parameters</h3>
+						<div data-strategic-params></div>
+					</div>
+					<div class="text-right"><div class="restore-defaults-btn" data-restore-data="graph2">Restore TODAY Defaults</div></div>
+
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<script type="text/javascript" src="./node_modules/requirejs/require.js"></script>
+	<script type="text/javascript" src="./js/app.js"></script>
+</body>
+</html>

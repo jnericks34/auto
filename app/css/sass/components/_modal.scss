@@ -1,0 +1,141 @@
+// modal dark background
+.modal-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(0,0,0,0.5);
+	z-index: 999;
+	text-align: center;
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+	transition: opacity 0.25s ease, visibility 0.01s ease 0.15s;
+	overflow: auto;
+	background-position: top center;
+	margin-right: 0;
+	&.active {
+		opacity: 1;
+		visibility: visible;
+		pointer-events: auto;
+		transition: opacity 0.25s ease, visibility 0.01s ease;
+		.modal-wrap {
+			transform: translate3d(0, 0, 0);
+			transition: transform 0.15s ease 0.01s;
+		}
+	}
+	&.table-modal {
+		.modal-content-wrap {
+			width: 700px;
+		}
+		.modal-content {
+			padding-top: 0;
+			padding-bottom: 5px;
+		}
+	}
+}
+
+// modal content wrapper
+.modal-wrap {
+	display: inline-block;
+	vertical-align: middle;
+	transform: translate3d(0, 45px, 0);
+	transition: transform 0.15s ease;
+	text-align: left;
+	margin-top: 140px;
+	margin-bottom: 30px;
+}
+.modal-content-wrap {
+	position: relative;
+	display: inline-block;
+	width: 590px;
+	max-width: 100%;
+	background: white;
+	box-shadow: 0 5px 15px 1px rgba(0,0,0,.2);
+}
+
+// modal header
+.modal-header {
+	padding: 25px 50px;
+	background: $contentBgColor;
+	font-size: 14px;
+	font-family: $mainFontBold;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	text-transform: uppercase;
+	.icon-close {
+		transition: opacity .2s ease;
+		&:hover {
+			opacity: .7;
+		}
+	}
+}
+.modal-subheader {
+	padding: 0 50px;
+	border-bottom: solid 1px $lightTextColor;
+}
+
+// modal content
+.modal-content {
+	overflow: auto;
+	max-height: 420px;
+	padding: 40px 50px 50px;
+	input {
+		margin: 20px 0;
+	}
+	.btn {
+		padding: 0 35px;
+	}
+	.title {
+		margin-bottom: 30px;
+		font-size: 14px;
+		font-family: $mainFontBold;
+		text-transform: uppercase;
+		& + * {
+			margin-top: 0;
+		}
+	}
+	p {
+		margin: 15px 0;
+	}
+	.export-method {
+		text-align: center;
+		padding: 40px 0 50px;
+		&:first-of-type {
+			padding-top: 0;
+		}
+		&:last-of-type {
+			padding-bottom: 0;
+		}
+		&+.export-method {
+			border-top: solid 1px $lightTextColor;
+		}
+
+	}
+}
+.toggle-modal {
+	cursor: pointer;
+}
+
+// load modal
+.modal-overlay[data-modal="load"] {
+	.modal-content {
+		min-height: 60px;
+	}
+	.date-col {
+		width: 90px;
+	}
+	.time-col {
+		width: 55px;
+	}
+}
+
+// save modal 
+.modal-overlay[data-modal="save"] {
+	.modal-content {
+		padding-top: 50px;
+		padding-bottom: 60px;
+	}
+}

@@ -1,0 +1,43 @@
+// placeholder mixin
+@mixin placeholder() {
+	&::-webkit-input-placeholder {
+		@content;
+	}
+
+	&::-moz-placeholder {
+		@content;
+	}
+
+	&:-ms-input-placeholder {
+		@content;
+	}
+
+	&:-moz-placeholder {
+		@content;
+	}
+}
+
+// input slider mixins
+@mixin sliderTrack() {
+	&::-webkit-slider-runnable-track {
+		@content;
+	}
+	&::-moz-range-track {
+		@content;
+	}
+	&::-ms-track {
+		@content;
+	}
+}
+
+@mixin sluderThumb() {
+	&::-webkit-slider-thumb {
+		@content;
+	}
+	&::-moz-range-thumb {
+		@content;
+	}
+	&::-ms-thumb {
+		@content;
+	}
+}

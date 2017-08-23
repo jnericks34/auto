@@ -1,0 +1,42 @@
+{
+  "name": "bermuda-api",
+  "version": "1.0.0",
+  "description": "API for simple dashboard to monitor and simulate costs for Bermuda automotive manufacturing plant",
+  "main": "app.js",
+  "engines": {
+    "node": "6.9.x"
+  },
+  "scripts": {
+    "start": "node app.js",
+    "lint": "eslint api/. --ext .js",
+    "lint:fix": "eslint api/. --ext .js --fix"
+  },
+  "author": "TCSCODER",
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "body-parser": "^1.17.2",
+    "co": "^4.6.0",
+    "config": "^1.26.1",
+    "cors": "^2.8.4",
+    "csvtojson": "^1.1.7",
+    "express": "^4.15.3",
+    "express-session": "^1.15.3",
+    "fs-extra": "^3.0.1",
+    "get-parameter-names": "^0.3.0",
+    "helmet": "^3.6.1",
+    "joi": "^10.6.0",
+    "lodash": "^4.17.4",
+    "morgan": "^1.8.2",
+    "nodemailer": "^4.0.1",
+    "pg": "^7.1.0",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.4.3",
+    "string": "^3.3.3",
+    "winston": "^2.3.1"
+  },
+  "devDependencies": {
+    "eslint": "^4.0.0",
+    "eslint-config-airbnb-base": "^11.2.0",
+    "eslint-plugin-import": "^2.3.0"
+  }
+}

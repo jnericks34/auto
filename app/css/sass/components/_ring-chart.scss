@@ -1,0 +1,24 @@
+// ring chart
+.ring-chart-el {
+	.values {
+		text-anchor: middle;
+		dominant-baseline: middle;
+	}
+	.cvalue {
+		font-size: 24px;
+		fill: $headerActiveTextColor;
+	}
+	.delta {
+		fill: $holdColor;
+	}
+}
+.ring-chart-title {
+	color: $headerActiveTextColor;
+	text-align: center;
+	margin: -4px 0 4px;
+}
+
+.bg-arc {
+	fill: rgba(0,0,0,0.23);
+}
+

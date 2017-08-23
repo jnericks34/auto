@@ -1,0 +1,175 @@
+.dashboard-page {
+	// general style
+	.top-area {
+		[data-graphs] {
+			margin-right: 65px;
+		}
+	}
+	.restore-defaults-btn {
+		position: absolute;
+		bottom: -85px;
+		right: 0px;
+	}
+	.sensitivity-graph {
+		display: none;
+		width: 50%;
+		padding: 47px 20px 0 0;
+	}
+}
+
+// sensitivity view changes
+.sensitivity-view {
+	// general page style
+	display: flex;
+	.graph-params {
+		width: 50%;
+	}
+	.sensitivity-graph {
+		display: block;
+		.graph-info {
+			width: 600px;
+			padding: 0 20px 0 50px;
+			margin: 0 auto 10px;
+		}
+		.title {
+			font-family: $mainFontBold;
+			text-transform: uppercase;
+			font-size: 14px;
+		}
+		.close {
+			color: $mainColor;
+			cursor: pointer;
+		}
+		.text-center {
+			opacity: .5;
+			text-transform: uppercase;
+			font-size: 12px;
+			padding: 5px 0 20px;
+		}
+	}
+	.section-wrap {
+		width: 100%;
+		&.col-6:nth-of-type(2n+1) {
+			margin-right: 0;
+		}
+		&.col-6:nth-of-type(2n) {
+			margin-left: 0;
+		}
+	}
+
+	// selected rows
+	.parameter-element {
+		position: relative;
+		color: $activeSliderColor;
+		&.selected-state:before {
+			content: '';
+			width: 15px;
+			height: 2px;
+			position: absolute;
+			left: 13px;
+			top: 17px;
+			background: currentColor;
+		}
+		&:not(.selected-state) {
+			.slider-wrap,
+			.toggle-wrap,
+			.editable-item-wrap input {
+				color: $activeSliderColor;
+				pointer-events: none;
+			}
+		}
+	}	
+
+	// get slider/toggle color
+	// from style attribute
+	.slider-wrap {
+		color: inherit;
+	}
+	input[type="range"] {
+		color: inherit;
+		@include sluderThumb { 
+			color: inherit;
+			background: currentColor;
+		}
+		@include sliderTrack {
+			color: inherit;
+			border-left: solid 1px currentColor;
+			background-image: linear-gradient(currentColor, currentColor), linear-gradient($inactiveSliderColor, $inactiveSliderColor);
+		}
+		&::-ms-track {
+			color: transparent;
+			background: transparent;
+		}
+
+		&::-ms-fill-lower {
+			color: inherit;
+			background: currentColor;
+		}
+	}
+	.toggle-wrap {
+		color: inherit;
+		.slide-btn {
+			color: inherit;
+			background: currentColor;
+		}
+	}
+}
+
+
+@media screen and (max-width: $tView) {
+	.dashboard-page {
+		// general style
+		.top-area {
+			.graphs-details {
+				justify-content: center;
+				align-items: flex-start;
+			}
+			[data-graphs] {
+				margin-right: 0;
+			}
+			[data-gauges],
+			[data-tables] {
+				display: none;
+			}
+			[data-gauges].active {
+				display: flex;
+				width: 260px;
+				margin-left: 30px;
+			}
+			[data-tables] {
+				width: auto;
+				margin-top: 10px;
+				&.active {
+					display: block;
+				}
+			}
+			
+			.ring-chart-el {
+				transform: scale(.8);
+			}
+			.ring-chart-title {
+				margin: -18px 0 -5px;
+			}
+			.nav {
+				bottom: 10px;
+				padding-left: 15px;
+			}
+		}
+	}
+
+	// sensitivity view
+	.sensitivity-view {
+		display: block;
+		.sensitivity-graph {
+			padding-top: 30px;
+			width: 111.2%;
+			margin-left: -5vw;
+			text-align: center;
+			background: $sensitivityColor;
+		}
+		.graph-params {
+			width: 100%;
+		}
+	}
+}
+

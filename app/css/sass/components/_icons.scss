@@ -1,0 +1,73 @@
+.icon {
+	display: inline-block;
+	vertical-align: middle;
+	background: url('../img/icons-sprite.png') no-repeat;
+}
+
+.icon-undo {
+	width: 20px;
+	height: 7px;
+	background-position: 0 0;
+}
+.icon-compare {
+	width: 12px;
+	height: 15px;
+	background-position: 0 -10px;
+	&.blue {
+		background-position: -15px -10px;
+	}
+}
+.icon-chart {
+	width: 16px;
+	height: 16px;
+	background-position: 0 -28px;
+}
+.icon-ring {
+	width: 14px;
+	height: 14px;
+	background-position: -20px -28px;
+}
+.icon-triangle {
+	width: 13px;
+	height: 9px;
+	background-position: 0 -47px;
+}
+.icon-pdf {
+	width: 16px;
+	height: 16px;
+	background-position: 0 -59px;
+	margin: -3px 0 0 3px;
+	&.white {
+		background-position: -21px -59px;
+	}
+}
+.icon-close {
+	width: 13px;
+	height: 13px;
+	background-position: 0 -78px;
+	&.blue {
+		width: 15px;
+		height: 15px;
+		background-position: -16px -78px;
+	}
+	&.xs {
+		width: 9px;
+		height: 9px;
+		background-position: -34px -78px;
+	}
+}
+.icon-download {
+	width: 17px;
+	height: 16px;
+	background-position: 0 -96px;
+}
+.icon-delete {
+	width: 13px;
+	height: 17px;
+	background-position: 0 -116px;
+}
+.icon-lock {
+	width: 8px;
+	height: 15px;
+	background-position: 0 -135px;
+}

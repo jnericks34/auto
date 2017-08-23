@@ -1,0 +1,210 @@
+{
+  "strategic": [
+    {
+      "parameterIndex": 0,
+      "title": "Profit per Car",
+      "name": "profit-per-car",
+      "type": "slider",
+      "min": 24,
+      "max": 200,
+      "step": 1
+    },
+    {
+      "parameterIndex": 19,
+      "title": "Detroit Percent",
+      "name": "detroit-perc",
+      "type": "slider",
+      "min": 0,
+      "max": 100,
+      "step": 1
+    },
+    {
+      "parameterIndex": 20,
+      "title": "Detroit Plant P. Rate",
+      "name": "detroit-plant-rate",
+      "type": "slider",
+      "min": 0,
+      "max": 1,
+      "step": 0.01
+    },
+    {
+      "parameterIndex": 21,
+      "title": "Mexico City Plant P. Rate",
+      "name": "mexico-plat-rate",
+      "type": "slider",
+      "min": 0,
+      "max": 1,
+      "step": 0.01
+    }
+  ],
+  "operational": {
+    "costs": [
+      {
+        "parameterIndex": 1,
+        "title": "Install cost for lights",
+        "name": "lights",
+        "type": "slider",
+        "min": 1,
+        "max": 3,
+        "step": 0.01
+      },
+      {
+        "parameterIndex": 2,
+        "title": "Cost per Back Seat Install",
+        "name": "backSeat",
+        "type": "slider",
+        "min": 0,
+        "max": 0.5,
+        "step": 0.01
+      },
+      {
+        "parameterIndex": 3,
+        "title": "Cost per Tire",
+        "name": "tire",
+        "type": "slider",
+        "min": 1,
+        "max": 4,
+        "step": 0.01
+      },
+      {
+        "parameterIndex": 4,
+        "title": "Engine Install Cost",
+        "name": "engine",
+        "type": "slider",
+        "min": 0,
+        "max": 1,
+        "step": 0.0001
+      },
+      {
+        "parameterIndex": 5,
+        "title": "QC Cost",
+        "name": "qc",
+        "type": "slider",
+        "min": 0,
+        "max": 1,
+        "step": 0.01
+      },
+      {
+        "parameterIndex": 6,
+        "title": "Cost Per Spark Plug",
+        "name": "sparkPlug",
+        "type": "slider",
+        "min": 0,
+        "max": 0.5,
+        "step": 0.01
+      }
+    ],
+    "rates": [
+      {
+        "parameterIndex": 7,
+        "title": "Painting Success Rate",
+        "name": "painting",
+        "type": "slider",
+        "min": 0,
+        "max": 100,
+        "step": 1
+      },
+      {
+        "parameterIndex": 8,
+        "title": "Wheel Assembly Success",
+        "name": "wheel-assembly",
+        "type": "slider",
+        "min": 0,
+        "max": 100,
+        "step": 1
+      },
+      {
+        "parameterIndex": 9,
+        "title": "Induction Success Rate",
+        "name": "induction",
+        "type": "slider",
+        "min": 0,
+        "max": 100,
+        "step": 1
+      },
+      {
+        "parameterIndex": 10,
+        "title": "Supply Chain Success",
+        "name": "supply-chain",
+        "type": "slider",
+        "min": 0,
+        "max": 100,
+        "step": 1
+      },
+      {
+        "parameterIndex": 11,
+        "title": "Break Lining Success Rate",
+        "name": "break-lining",
+        "type": "slider",
+        "min": 0,
+        "max": 100,
+        "step": 1
+      },
+      {
+        "parameterIndex": 12,
+        "title": "Tests Per Plug Success",
+        "name": "tests-per-plug",
+        "type": "slider",
+        "min": 0,
+        "max": 100,
+        "step": 1
+      },
+      {
+        "parameterIndex": 13,
+        "title": "Fuel Ignition Success Rate",
+        "name": "fuel-ignition",
+        "type": "slider",
+        "min": 0,
+        "max": 100,
+        "step": 1
+      }
+    ]
+  },
+  "tactical": [
+    {
+      "parameterIndex": 18,
+      "title": "Annual Car Production",
+      "name": "anual-production",
+      "type": "slider",
+      "min": 0,
+      "max": 1000000,
+      "step": 1
+    },
+    {
+      "parameterIndex": 14,
+      "title": "Sedan Percent",
+      "name": "sedan-perc",
+      "type": "slider",
+      "min": 0,
+      "max": 100,
+      "step": 1
+    },
+    {
+      "parameterIndex": 15,
+      "title": "Luxury Sedan Percent",
+      "name": "luxury-sedan-perc",
+      "type": "slider",
+      "min": 0,
+      "max": 100,
+      "step": 1
+    },
+    {
+      "parameterIndex": 16,
+      "title": "SUV Percent",
+      "name": "suv-perc",
+      "type": "slider",
+      "min": 0,
+      "max": 100,
+      "step": 1
+    },
+    {
+      "parameterIndex": 17,
+      "title": "Luxury SUV Percent",
+      "name": "luxury-suv-perc",
+      "type": "slider",
+      "min": 0,
+      "max": 100,
+      "step": 1
+    }
+  ]
+}

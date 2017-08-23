@@ -1,0 +1,23 @@
+input:not([type="range"]) {
+	width: 100%;
+	height: 30px;
+	padding: 0 9px;
+	border: none;
+	outline: none;
+	line-height: 30px;
+	font-size: 15px;
+	color: $mainColor;
+	background: $disabledColor;
+	border: solid 1px $disabledColor;
+	&:disabled {
+		border: none;
+		opacity: .7;
+	}
+	&:focus {
+		border-color: $focusColor;
+	}
+	@include placeholder {
+		color: $mainColor;
+		font: 15px/15px $mainFont;
+	}
+}

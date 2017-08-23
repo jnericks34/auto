@@ -1,0 +1,36 @@
+<div class="modal-overlay table-modal load-scenario-modal" data-modal="load">
+	<div class="modal-wrap">
+		<div class="modal-content-wrap">
+			<div class="modal-header">
+				<span>Load</span>
+				<span class="toggle-modal" data-modal="load"><span class="icon icon-close blue"></span></span>
+			</div>
+			<!-- chart saves table -->
+			<div class="modal-subheader">
+				<table>
+					<thead>
+						<tr>
+							<th class="date-col">Date</th>
+							<th class="time-col">Time</th>
+							<th>Scenario Name</th>
+							<th></th>
+						</tr>
+					</thead>
+				</table>
+			</div>
+			<div class="modal-content">
+				<table>
+					<tbody>
+						<tr class="load-row" data-row-tpl>
+							<td class="date-col" data-col-date></td>
+							<td class="time-col" data-col-time></td>
+							<td class="name" data-col-total data-load-scenario="load-row"></td>
+							<!-- remove the row, there's a listener for clicks on rm -->
+							<td class="actions"><span class="icon icon-delete" data-delete-scenario="load-row"></span></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

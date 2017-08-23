@@ -1,0 +1,158 @@
+// parameter element
+.parameter-element {
+	width: calc(100% + 70px);
+    margin: 5px 0 5px -35px;
+    padding: 2px 35px;
+	&.hold-state,
+	&.hold-common,
+	&.selected-state {
+		background: rgba(0,0,0,0.027);
+		input:not([type="range"]) {
+			background: white;
+			border-color: $lightTextColor;
+			&:focus {
+				border-color: inherit;
+			}
+		}
+	}
+	&.selected-state {
+		position: relative;
+		color: $activeSliderColor;
+		&:before {
+			content: '';
+			width: 15px;
+			height: 2px;
+			position: absolute;
+			left: 13px;
+			top: 17px;
+			background: currentColor;
+		}
+	}
+}
+
+// parameter element content
+.editable-item-wrap {
+	display: flex;
+	align-items: center;
+	input:not([type="range"]) {
+		width: 60px;
+		padding: 0 5px;
+		height: 25px;
+		line-height: 25px;
+		font-size: 13px;
+		font-family: $mainFontBold;
+		margin-left: 10px;
+		text-align: center;
+	}
+	.name-col {
+		width: 33.33%;
+		color: $textColor;
+	}
+	.chart-col {
+		width: 95px;
+	}
+	.slider-col {
+		width: calc(66.66% - 95px);
+	}
+	.icon-chart {
+		position: relative;
+		cursor: pointer;
+		&:after {
+			content: '';
+			position: absolute;
+			width: calc(100% + 6px);
+			height: calc(100% + 6px);
+			top: -3px;
+			left: -3px;
+			background: linear-gradient(rgba(0,0,0,.35), rgba(0,0,0,.15));
+			border-radius: 2px;
+			opacity: 0;
+			transition: opacity .2s ease;
+		}
+		&:hover,
+		.selected-state & {
+			&:after {
+				opacity: 1;
+			}
+		}
+	}
+}
+
+// locked group
+.locked-items {
+	position: relative;
+	width: calc(100% + 5px);
+	margin-left: -5px;
+	&:before {
+		content: '';
+		width: 3px;
+		height: calc(100% - 17px);
+		position: absolute;
+		top: 0px;
+		left: -3px;
+		background: rgba(0,0,0,0.027);
+	}
+	.parameter-element:first-of-type {
+		padding-top: 0;
+		padding-bottom: 0;
+		.editable-item-wrap {
+			width: calc(100% + 15px);
+			padding: 20px 15px 20px 5px;
+			background: rgba(0,0,0,0.027);
+			input:not([type="range"]) {
+				background: #f2f4f4;
+			}
+		}
+		.name-col {
+			width: calc(33.33% - 6px);
+		}
+		.chart-col {
+			width: 107px;
+			input{
+				width: 72px;
+			}
+		}
+		&.hold-state,
+		&.hold-common {
+			width: calc(100% + 65px);
+			margin-left: -30px;
+			padding: 0 35px 0 30px;
+		}
+	}
+	.parameter-element:not(:first-of-type) {
+		.editable-item-wrap {
+			position: relative;
+			padding-left: 5px;
+			&:after {
+				content: '';
+				width: 8px;
+				height: 15px;
+				display: inline-block;
+				vertical-align: middle;
+				background: url('../img/icons-sprite.png') no-repeat;
+				background-position: 0 -135px;
+				position: absolute;
+				top: 4px;
+				left: 12px;
+			}
+			&:before {
+				content: '';
+				position: absolute;
+				top: 11px;
+				left: 0;
+				width: 6px;
+				height: 3px;
+				background: rgba(0,0,0,0.027);
+			}
+			.name-col {
+				padding-left: 30px;
+			}
+		}
+		&.hold-state,
+		&.hold-common {
+			width: calc(100% + 65px);
+			margin-left: -30px;
+			padding-left: 30px;
+		}
+	}
+}

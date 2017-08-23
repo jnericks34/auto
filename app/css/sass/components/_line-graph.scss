@@ -1,0 +1,48 @@
+// main graph
+.line-chart-el {
+	.domain {
+		stroke: rgba(255,255,255,.5);
+	}
+	svg {
+		.line, .hline {
+			fill: none;
+			stroke-width: 2px;
+		}
+
+		.hline {
+			stroke: #ffd900;
+		}
+
+		.hline:not(.on-hold) {
+			display: none;
+		}
+
+		.hold-knob {
+			fill: #ffd900;
+			cursor: pointer;
+		}
+	}
+}
+
+// main graph grid
+.axis {
+	.tick line {
+		opacity: 0;
+	}
+	* {
+		fill: rgba(255,255,255,.5);
+		font-family: $mainFont;
+	}
+}
+
+.grid .tick line{ 
+	stroke: #7eb7c7;
+}
+.grids .tick line{ 
+	stroke: #59a2b6;
+}
+
+.area {
+	opacity: .25;
+	stroke: none;
+}

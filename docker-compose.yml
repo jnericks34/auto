@@ -1,0 +1,28 @@
+version: '2.0'
+
+services:
+  api:
+    build: api
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URL: postgres://bermuda-api:topcoder1@postgres/bermuda_db
+      DATABASE_SSL: 0
+      SMTP_HOST: 'smtp.gmail.com'
+      SMTP_USERNAME: 'username'
+      SMTP_PASSWORD: 'password'
+    ports:
+      - 3000:3000
+    command: ["./wait-for-it.sh",  "db:5432", "--", "node", "./app.js"]
+  app:
+    build: app
+    ports:
+      - 8080:8080
+  postgres:
+    image: postgres
+    expose:
+      - 5432
+    environment:
+      POSTGRES_USER: bermuda-api
+      POSTGRES_PASSWORD: topcoder1
+      POSTGRES_DB: bermuda_db
