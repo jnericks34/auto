@@ -24,8 +24,9 @@ const parameterConfiguration = jsonfile.readJsonSync('data/parameters.json');
 function* _prepareResult(isAutomate, parameters) {
   const file = isAutomate ? config.PATHS.AutomateYes : config.PATHS.AutomateNo;
   const params = _.sortBy(parameters,function(param){return parseInt(param.split(':')[0]);});
+  const param = params.join(',')
 
-  const output = cp.execFileSync(file, params, {
+  const output = cp.execFileSync(file, [param], {
     encoding: 'utf8'
   });
 
