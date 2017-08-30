@@ -474,8 +474,6 @@ define(['exports', 'jquery', 'd3', 'models/model', 'models/costs', 'models/sensi
 			};
 		};
 
-
-
 		/**
 		 * initModals Create and attach the page modals
 		 * @param  {jqueryElement} $cEl Container
@@ -494,4 +492,5 @@ define(['exports', 'jquery', 'd3', 'models/model', 'models/costs', 'models/sensi
 				return response;
 			});
 		}
+		
 	});

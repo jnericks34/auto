@@ -755,6 +755,7 @@ input:not([type="range"]):-moz-placeholder {
 }
 .top-area [data-tables] {
   width: 420px;
+  max-height: 400px;
 }
 .top-area th {
   font-size: 13px;
@@ -864,6 +865,7 @@ input:not([type="range"]):-moz-placeholder {
 .top-area-content {
   min-height: 312px;
   align-items: stretch;
+  overflow: auto;
 }
 
 @media screen and (max-width: 1360px) {
@@ -1213,10 +1215,10 @@ input[type="range"]::-ms-fill-upper {
 .line-chart-el .domain {
   stroke: rgba(255, 255, 255, 0.5);
 }
-/* .line-chart-el svg .line, .line-chart-el svg .hline {
+.line-chart-el svg .line, .line-chart-el svg .hline {
   fill: none;
   stroke-width: 2px;
-} */
+}
 .line-chart-el svg .hline {
   stroke: #ffd900;
 }
@@ -1244,10 +1246,10 @@ input[type="range"]::-ms-fill-upper {
   stroke: #59a2b6;
 }
 
-/* .area {
+.area {
   opacity: .25;
   stroke: none;
-} */
+}
 
 .ring-chart-el .values {
   text-anchor: middle;
@@ -1393,6 +1395,18 @@ input[type="range"]::-ms-fill-upper {
 .modal-content .export-method {
   text-align: center;
   padding: 40px 0 50px;
+}
+.modal-content .export-method input::-webkit-input-placeholder {
+  text-align: center;
+}
+.modal-content .export-method input:-moz-placeholder {
+  text-align: center;
+}
+.modal-content .export-method input::-moz-placeholder {
+  text-align: center;
+}
+.modal-content .export-method input:-ms-input-placeholder {
+  text-align: center;
 }
 .modal-content .export-method:first-of-type {
   padding-top: 0;
@@ -1717,10 +1731,10 @@ input[type="range"]::-ms-fill-upper {
   position: relative;
 }
 .compare-page .graphs-wrap .graph-btns {
-  position: absolute;
-  right: 30px;
-  bottom: 10px;
   text-align: right;
+  padding-top: 200px;
+  padding-left: 20px;
+  clear: both;
 }
 .compare-page .graphs-wrap .graph-btns a {
   display: block;
@@ -1729,6 +1743,7 @@ input[type="range"]::-ms-fill-upper {
   transition: color .2s ease;
 }
 .compare-page .graphs-wrap .graph-btns a:hover {
+  position: relative;
   opacity: 1;
   color: #fff;
 }

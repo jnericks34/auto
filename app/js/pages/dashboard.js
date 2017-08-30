@@ -1,4 +1,4 @@
-define(['jquery', 'helpers/data', 'helpers/ui', 'lodash', 'Api', 'helpers/pdfHelper'], function ($, data, ui, _, Api, pdfHelper) {
+define(['jquery', 'helpers/data', 'helpers/ui', 'lodash', 'Api', 'helpers/pdfHelper', 'moment', 'd3'], function ($, data, ui, _, Api, pdfHelp, moment, d3) {
 	'use strict';
 
 	// create minimal page state
@@ -8,6 +8,8 @@ define(['jquery', 'helpers/data', 'helpers/ui', 'lodash', 'Api', 'helpers/pdfHel
 	};
 	var graph;
 	var parametersList;
+	var pdfHelper = pdfHelp;
+	var newGraph = false;
 
 	// cache body
 	var $container = $('body');
@@ -39,7 +41,7 @@ define(['jquery', 'helpers/data', 'helpers/ui', 'lodash', 'Api', 'helpers/pdfHel
 		state.hold = false;
 
 	}
-
+	
 	function renderGraphData(graph, paramsList) {
 		sensitivityTable = ui.appendSensitivityTable($container, paramsList);
 
@@ -64,7 +66,7 @@ define(['jquery', 'helpers/data', 'helpers/ui', 'lodash', 'Api', 'helpers/pdfHel
 		data.toggleParamsHold(paramsList.arr, state.hold);
 
 		graph.onSaveScenario = $('[data-save-scenario]').off('click').bind('click', function () {
-			var newScenarioName = $("#newScenarioName").val();
+			var newScenarioName = $("#newScenarioName").val().trim();
 			if (newScenarioName && newScenarioName.length > 0) {
 				var parameters = _.chain(paramsList.arr).map(function (item) {
 					return {
@@ -80,21 +82,19 @@ define(['jquery', 'helpers/data', 'helpers/ui', 'lodash', 'Api', 'helpers/pdfHel
 				}
 				if (state.activeGraphId <= 0) {
 					Api.createScenario(scenario).then(function (result) {
-						alert('Scenario is saved successfully');
-						$("newScenarioName").val('');
+						alert('Scenario saved successfully');
 						state.graphs.push(result);
 						addTabsMenu([result]);
-						$(".save-scenario-modal").find('.toggle-modal').trigger('click');
-					});
+						$(".save-scenario-modal").find('.toggle-modal').trigger('click')});
+
 				} else {
 					Api.updateScenario(state.activeGraphId, scenario).then(function () {
-						alert('Scenario is saved successfully');
-						$("newScenarioName").val('');
+						alert('Scenario saved successfully');
 						$(".save-scenario-modal").find('.toggle-modal').trigger('click');
 					});
 				}
 			} else {
-				alert('Please enter the scenario name.');
+				alert('Please enter valid scenario name.');
 			}
 		});
 		graph.onDownloadPDf = $("[data-download-pdf]").off('click').on('click', function () {
@@ -105,15 +105,21 @@ define(['jquery', 'helpers/data', 'helpers/ui', 'lodash', 'Api', 'helpers/pdfHel
 		graph.onSharePdf = $('[data-share-pdf]').off('click').on('click', function () {
 			var pdfName = $("[data-pdf-name]").text();
 			var email = $("[data-share-email]").val();
-			pdfHelper.getPDF(paramsList, paramsList.costModels, graph.container, pdfName).done(function(data){
-				data.document.getBase64(function(pdfDoc){
-					var apiData = {doc:pdfDoc, fileName:pdfName, email:email}
-					Api.shareScenario(apiData).then(function(){
-						alert('Scenario report shared successfully');
-						$('.modal-overlay[data-modal="export"]').toggleClass('active');
-					});
-				})
-			});
+			var validEmail = new RegExp(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/);
+			if (!validEmail.test(email)){
+			  alert('Please enter valid email id');
+			  return;
+			} else {
+			  pdfHelper.getPDF(paramsList, paramsList.costModels, graph.container, pdfName).done(function(data){
+				  data.document.getBase64(function(pdfDoc){
+				  	var apiData = {doc:pdfDoc, fileName:pdfName, email:email}
+				  	Api.shareScenario(apiData).then(function(){
+				  		alert('Scenario report sent successfully');
+				  		$('.modal-overlay[data-modal="export"]').toggleClass('active');
+				  	});
+				  })
+			  });
+		  }
 		})
 		if (state.activeGraphId > 0) {
 			var tabMenu = $(".tab[data-select-graph='" + state.activeGraphId + "']");
@@ -125,9 +131,11 @@ define(['jquery', 'helpers/data', 'helpers/ui', 'lodash', 'Api', 'helpers/pdfHel
 			$(".tab[data-select-graph='" + state.activeGraphId + "']").addClass('active');
 
 			$(".action-btns .title span").text('Active ' + graphDetail.name);
+			$('[data-selected-graph]').text(graphDetail.name);
 		}
 		else {
-			$(".action-btns .title span").text('Active default paramter');
+			$(".action-btns .title span").text('Active default parameter');
+			$('[data-selected-graph]').text('default');
 		}
 	}
 
@@ -144,6 +152,7 @@ define(['jquery', 'helpers/data', 'helpers/ui', 'lodash', 'Api', 'helpers/pdfHel
 
 	// bind the graph selector actions
 	$(document).on('click', '[data-select-graph]', function (e) {
+		$('[data-sensitivity-graph]').empty();
 		var $target = $(this), tab = $target.closest('.tab');
 		if (tab.is('.active')) {
 			return;
@@ -169,7 +178,7 @@ define(['jquery', 'helpers/data', 'helpers/ui', 'lodash', 'Api', 'helpers/pdfHel
 		if (isCurrentActive) {
 			var nextGraphId = parseInt(nextGraphTab.data('selectGraph'), 10);
 			if (_.isFinite(nextGraphId)) {
-				showGraph(state, nextGraphId);
+				showGraph(state, nextGraphId);S	
 			} else {
 				showGraph(state, 0);
 			}
@@ -202,21 +211,27 @@ define(['jquery', 'helpers/data', 'helpers/ui', 'lodash', 'Api', 'helpers/pdfHel
 
 	$(document).on('click', '[data-load-scenario]', function (ev) {
 		ev.stopPropagation();
+		$('[data-sensitivity-graph]').empty();
 		var target = $(ev.target);
 		var row = target.closest('.' + target.data('load-scenario'));
 		var graphId = _.toNumber(row.data('id'));
-
 		showGraph(state, graphId);
 		$(".load-scenario-modal").find('.toggle-modal').trigger('click');
 	});
 
 	$(document).on('click', '[data-add-graph-scneario]', function () {
 		var id = $(this).closest('tr').data('id');
+		newGraph = true;
 		showGraph(state, id);
+		$('.add-new-graph .toggle-modal').find('.icon-close').trigger('click');
 	});
 
 	$(document).on('click', '.saveScenario', function () {
-		if (state.activeGraphId <= 0) {
+		if (state.activeGraphId <= 0 || newGraph === true) {
+		  $("span[data-save-date]").text(moment().format('DD/MM/YYYY'));
+		  $("span[data-save-time]").text(moment().format('HH:mm'));
+		  $("#newScenarioName").val('');
+		  newGraph = false;
 			$(".save-scenario-modal").find('.toggle-modal').trigger('click');
 		} else {
 			var parameters = _.chain(parametersList.arr).map(function (item) {
@@ -273,9 +288,17 @@ define(['jquery', 'helpers/data', 'helpers/ui', 'lodash', 'Api', 'helpers/pdfHel
 			nextGraphTab.trigger('click');
 		}
 	});
+	
+	// Closes Modal if clicked outside
+	$(document).on('click', '.modal-overlay.active', function (ev) {
+	  if(!$(ev.target).parents('.modal-content-wrap').is('.modal-content-wrap')) {
+      $('.modal-overlay.active').removeClass('active');
+    }
+	});
 
 	function addTabsMenu(graphs) {
 		var graphMenuHtml = '';
+		var loadMenuHtml = '';
 		$.each(graphs, function (index, graph) {
 			graphMenuHtml += '<div class="tab" data-select-graph="' + graph.id + '">' +
 				'<span class="title">' + graph.name + '</span>' +
@@ -284,8 +307,6 @@ define(['jquery', 'helpers/data', 'helpers/ui', 'lodash', 'Api', 'helpers/pdfHel
 		});
 		$(".header-wrap .tabs-content .add-tab").before(graphMenuHtml);
 	}
-
-
 
 	ui.initModals($container).then(function (graphs) {
 		// show the graph

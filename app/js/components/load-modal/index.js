@@ -12,7 +12,7 @@ define(['jquery', 'd3', 'components/ui-component/index', 'moment', 'Api'], funct
 
 		this.elems = {
 			'$rowTpl': '[data-row-tpl]',
-			'$rowsWrap': 'tbody'
+			'$rowsWrap': '[load-rows]'
 		};
 
 		this.super.apply(this, arguments);
@@ -34,7 +34,7 @@ define(['jquery', 'd3', 'components/ui-component/index', 'moment', 'Api'], funct
 			});
 		});
 		var graphRows = d3.select(this.$rowsWrap[0])
-			.selectAll('tr')
+			.selectAll('tr.load-row')
 			.data(data);
 
 		graphRows.enter().append(this.rowTpl.bind(this));
@@ -43,8 +43,9 @@ define(['jquery', 'd3', 'components/ui-component/index', 'moment', 'Api'], funct
 	}
 
 	/**
-	 * rowTpl Template function for the graph saves
-	 * @param  {any} d The data available for current row
+	 * rowTpl Template for new graph name row
+	 * @param  {DomElement} row The element that's being updated
+	 * @param  {any} d   Data for the row
 	 */
 	LoadModal.prototype.rowTpl = function (d) {
 		var row = this.$rowTpl.clone();

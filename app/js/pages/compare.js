@@ -1,8 +1,10 @@
-define(['jquery', 'helpers/data', 'helpers/ui', 'components/components', 'helpers/pdfHelper', 'Api'], function ($, data, ui, comp, pdfHelper, Api) {
+define(['jquery', 'helpers/data', 'helpers/ui', 'components/components', 'helpers/pdfHelper', 'Api'], function ($, data, ui, comp, pdfHelp, Api) {
 	'use strict';
 
 	// cache the body
 	var $container = $('body');
+	
+	var pdfHelper = pdfHelp;
 
 	// create a minimal current page state
 	var state = {
@@ -86,7 +88,7 @@ define(['jquery', 'helpers/data', 'helpers/ui', 'components/components', 'helper
 		var inputPayload = _.pick(graph, ['name', 'isAutomate', 'parameters']);
 
 		Api.updateScenario(graph.id, inputPayload).then(function () {
-			alert('Scenario is saved successfully');
+			alert('Scenario saved successfully');
 		});
 	});
 
@@ -108,21 +110,34 @@ define(['jquery', 'helpers/data', 'helpers/ui', 'components/components', 'helper
 		pdfHelper.downloadPDF(graphState.paramsList, graphState.paramsList.costModels, graphState.container, pdfName);
 	})
 
-	$($container).on('click', '[data-share-pdf]', function () {
+	$(document).on('click', '[data-share-pdf]', function () {
 		var graphTarget = $('[data-download-pdf]').data("graphTarget");
 		var graphState = data.slice(state, graphTarget);
 		var pdfName = $("[data-pdf-name]").text();
 		var email = $("[data-share-email]").val();
-		pdfHelper.getPDF(graphState.paramsList, graphState.paramsList.costModels, graphState.container, pdfName).done(function(data){
-			data.document.getBase64(function(pdfDoc){
-				var apiData = {doc:pdfDoc, fileName:pdfName, email:email}
-				Api.shareScenario(apiData).then(function(){
-					alert('Scenario report shared successfully');
-					$('.modal-overlay[data-modal="export"]').toggleClass('active');
-				});
-			})
-		});
+		var validEmail = new RegExp(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/);
+		if (!validEmail.test(email)) {
+		  alert('Please enter valid email id');
+			return;
+		} else {
+		  pdfHelper.getPDF(graphState.paramsList, graphState.paramsList.costModels, graphState.container, pdfName).done(function(data){
+			  data.document.getBase64(function(pdfDoc){
+				  var apiData = {doc:pdfDoc, fileName:pdfName, email:email}
+				  Api.shareScenario(apiData).then(function(){
+					  alert('Scenario report sent successfully');
+					  $('.modal-overlay[data-modal="export"]').toggleClass('active');
+				  });
+			  })
+		  });
+		}
 	})
+	
+	// Closes Modal if clicked outside
+	$(document).on('click', '.modal-overlay.active', function (ev) {
+	  if(!$(ev.target).parents('.modal-content-wrap').is('.modal-content-wrap')) {
+      $('.modal-overlay.active').removeClass('active');
+    }
+	});
 
 	// attach the page modals
 	ui.initModals($container)

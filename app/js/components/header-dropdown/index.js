@@ -44,7 +44,6 @@ define(['jquery', 'd3', 'components/ui-component/index', 'moment'], function ($,
 	 * updateRows Render the available graphs and saves
 	 */
 	HeaderDropdown.prototype.updateRows = function () {
-		var vm = this;
 		var data = [];
 		this.model.map(function (item) {
 			data.push({
