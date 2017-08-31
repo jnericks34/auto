@@ -103,6 +103,7 @@
 	.add-tab {
 		cursor: pointer;
 		font-family: $mainFontBold;
+		margin: 0 30px;
 		.icon-wrap {
 			display: inline-flex;
 			align-items: center;
@@ -110,7 +111,6 @@
 			vertical-align: middle;
 			width: 25px;
 			height: 25px;
-			margin: 0 30px;
 			border: solid 2px $headerTextColor;
 		} 
 		>* {
