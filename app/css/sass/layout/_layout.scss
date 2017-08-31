@@ -137,6 +137,9 @@ tbody {
 .light-text {
 	color: $lightTextColor;
 }
+input{
+	box-shadow: unset;
+}
 
 // section element
 .section-wrap {
