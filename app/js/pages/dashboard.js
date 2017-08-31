@@ -155,13 +155,14 @@ define(['jquery', 'helpers/data', 'helpers/ui', 'lodash', 'Api', 'helpers/pdfHel
 		$('[data-sensitivity-graph]').empty();
 		var $target = $(this), tab = $target.closest('.tab');
 		if (tab.is('.active')) {
+			$('.tabs.active').removeClass('active');
 			return;
 		}
-
 		tab.addClass('active').siblings().removeClass('active');
 		$('[data-gv-toggle="tables"][data-page-number=1]').trigger('click');
 		var graphId = parseInt($target.data('selectGraph'), 10);
 		$('[data-selected-graph]').text($target.text());
+		$('.tabs.active').removeClass('active');
 		showGraph(state, graphId);
 	});
 
@@ -216,6 +217,7 @@ define(['jquery', 'helpers/data', 'helpers/ui', 'lodash', 'Api', 'helpers/pdfHel
 		var row = target.closest('.' + target.data('load-scenario'));
 		var graphId = _.toNumber(row.data('id'));
 		showGraph(state, graphId);
+		$('[data-gv-toggle="tables"][data-page-number=1]').trigger('click');
 		$(".load-scenario-modal").find('.toggle-modal').trigger('click');
 	});
 
