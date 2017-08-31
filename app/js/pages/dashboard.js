@@ -172,14 +172,13 @@ define(['jquery', 'helpers/data', 'helpers/ui', 'lodash', 'Api', 'helpers/pdfHel
 		ev.stopPropagation();
 		var target = $(ev.target);
 		var tab = target.closest('.' + target.data('rm'));
-
 		var isCurrentActive = tab.is('.active');
 		var nextGraphTab = tab.nextOrFirst('.tab');
 		tab.remove();
 		if (isCurrentActive) {
 			var nextGraphId = parseInt(nextGraphTab.data('selectGraph'), 10);
 			if (_.isFinite(nextGraphId)) {
-				showGraph(state, nextGraphId);S	
+				showGraph(state, nextGraphId);
 			} else {
 				showGraph(state, 0);
 			}

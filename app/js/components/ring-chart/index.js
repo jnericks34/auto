@@ -58,6 +58,9 @@ define(['jquery', 'components/ui-component/index', 'd3'], function ($, UiCompone
 			// value will be percent of value at 365 divided by value at 1000
 			var value365 = model.cost(365);
 			var value1000 = model.cost(1000);
+			if (value1000 === 0) {
+			  value1000 = 1;
+			}
 			var value = _.divide(value365, value1000), fm = d3.format('.0%');
 			// update text for current value + progress arc
 			this.text.text(fm(value));
