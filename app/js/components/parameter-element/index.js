@@ -51,7 +51,7 @@ define(['jquery', 'd3', 'components/ui-component/index', 'components/toggle-inpu
 		// watch for model changes and schedule element view updates
 		this.model.rx.value.subscribe(this.onValueUpdate.bind(this));
 		this.model.rx.holdValue.subscribe(this.updateHoldState.bind(this));
-		
+
 		// trigger custom event when clicking the element's graph icon
 		this.plotBtn.bind('click', function () {
 			this.$el.trigger('plot:sensitivity', this.model);
@@ -67,6 +67,9 @@ define(['jquery', 'd3', 'components/ui-component/index', 'components/toggle-inpu
 	 * 	Sibling meaning elements with same data-target attributes
 	 */
 	ParameterElement.prototype.onValueUpdate = function onValueUpdate() {
+		if (this.model.value > this.model.max) {
+			this.model.value = this.model.max;
+		}
 		if (this.model.holdValue !== undefined && this.model.holdValue !== this.model.value) {
 			this.$el.addClass('hold-state');
 			$('[data-target="' + this.model.name + '"]').addClass('hold-common');
