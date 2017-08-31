@@ -83,8 +83,9 @@ define(['jquery', 'helpers/data', 'helpers/ui', 'lodash', 'Api', 'helpers/pdfHel
 						alert('Scenario is saved successfully');
 						$("newScenarioName").val('');
 						state.graphs.push(result);
-						addTabsMenu([result]);
-						ui.initModals($container);
+						$(".tabs-content .tab.active").data('selectGraph', result.id);
+						$(".tabs-content .tab.active").find('.title').text(result.name);
+						ui.initModals();
 						$(".save-scenario-modal").find('.toggle-modal').trigger('click');
 					});
 				} else {
