@@ -103,6 +103,7 @@
 	.add-tab {
 		cursor: pointer;
 		font-family: $mainFontBold;
+		margin: 0 30px;
 		.icon-wrap {
 			display: inline-flex;
 			align-items: center;
@@ -110,7 +111,6 @@
 			vertical-align: middle;
 			width: 25px;
 			height: 25px;
-			margin: 0 30px;
 			border: solid 2px $headerTextColor;
 		} 
 		>* {
@@ -173,16 +173,18 @@
 	position: relative;
 	display:  inline-block;
 	font-family: $mainFontBold;
+
 	.dropdown-content {
 		display: none;
-		position: fixed;
+		position: absolute;
 		z-index: 10;
-		top: 60px;
+		top: 45px;
+		right: 0;
 		margin: 0;
 		padding: 0;
 		list-style: none;
 		background: $headerActiveTextColor;
-		text-align: center;	
+		text-align: center;
 
 		li {
 			border-bottom: solid 1px #e2e2e2;
@@ -211,6 +213,14 @@
 		.title {
 			padding: 15px 23px;
 			line-height: 30px;
+			span {
+				display: inline-block;
+				height: 30px;
+				max-width: 250px;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+			}
 		}
 		a:hover {
 			color: inherit;

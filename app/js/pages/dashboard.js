@@ -84,9 +84,11 @@ define(['jquery', 'helpers/data', 'helpers/ui', 'lodash', 'Api', 'helpers/pdfHel
 					Api.createScenario(scenario).then(function (result) {
 						alert('Scenario saved successfully');
 						state.graphs.push(result);
-						addTabsMenu([result]);
-						$(".save-scenario-modal").find('.toggle-modal').trigger('click')});
-
+						$(".tabs-content .tab.active").data('selectGraph', result.id);
+						$(".tabs-content .tab.active").find('.title').text(result.name);
+						ui.initModals();
+						$(".save-scenario-modal").find('.toggle-modal').trigger('click');
+					});
 				} else {
 					Api.updateScenario(state.activeGraphId, scenario).then(function () {
 						alert('Scenario saved successfully');

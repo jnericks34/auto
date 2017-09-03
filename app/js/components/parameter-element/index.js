@@ -67,6 +67,9 @@ define(['jquery', 'd3', 'components/ui-component/index', 'components/toggle-inpu
 	 * 	Sibling meaning elements with same data-target attributes
 	 */
 	ParameterElement.prototype.onValueUpdate = function onValueUpdate() {
+		if (this.model.value > this.model.max) {
+			this.model.value = this.model.max;
+		}
 		if (this.model.holdValue !== undefined && this.model.holdValue !== this.model.value) {
 			this.$el.addClass('hold-state');
 			$('[data-target="' + this.model.name + '"]').addClass('hold-common');
