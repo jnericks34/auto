@@ -51,7 +51,7 @@ define(['jquery', 'd3', 'components/ui-component/index', 'components/toggle-inpu
 		// watch for model changes and schedule element view updates
 		this.model.rx.value.subscribe(this.onValueUpdate.bind(this));
 		this.model.rx.holdValue.subscribe(this.updateHoldState.bind(this));
-		
+
 		// trigger custom event when clicking the element's graph icon
 		this.plotBtn.bind('click', function () {
 			this.$el.trigger('plot:sensitivity', this.model);
