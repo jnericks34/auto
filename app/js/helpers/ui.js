@@ -376,7 +376,7 @@ define(['exports', 'jquery', 'd3', 'models/model', 'models/costs', 'models/sensi
 			 */
 		exports.appendSensitivityTable = function ($cEl, paramList) {
 			// create data model
-			var sensitivityData = new Model({ data: [], changedCount: 0 });
+			var sensitivityData = new Model({ data: [], changedCount: 0, activeId: [] });
 
 			// Attach the line graph indicating the costs
 			(new comp.SensitivityChart({
@@ -409,6 +409,7 @@ define(['exports', 'jquery', 'd3', 'models/model', 'models/costs', 'models/sensi
 							sensData.model.sensitivityArray = responseSensitivity;
 							sensitivityData.changedCount += 1;
 						});
+						sensitivityData.changedCount += 1;
 					});
 				});
 			});
@@ -447,15 +448,21 @@ define(['exports', 'jquery', 'd3', 'models/model', 'models/costs', 'models/sensi
 				})[0];
 
 				if (isPlotted) {
+					sensitivityData.activeId = sensitivityData.activeId.filter(function (p) {
+						return p !== param.uuid;
+					});
 					sensitivityData.data = sensitivityData.data.filter(function (p) {
 						return p.model._uuid !== param.uuid;
 					});
 					$(ev.target).removeClass('is-plotted');
 				} else {
 					if (_.isNumber(param.orig.parameterIndex)) {
+						sensitivityData.activeId.push(param.uuid);
 						Api.getSensitivity(isAutomate, parameters, param.orig.parameterIndex).then(function (responseSensitivity) {
-							plotted[param.uuid].model.sensitivityArray = responseSensitivity;
-							sensitivityData.data = sensitivityData.data.concat(plotted[param.uuid]);
+							if (_.indexOf(sensitivityData.activeId, param.uuid) > -1) {
+								plotted[param.uuid].model.sensitivityArray = responseSensitivity;
+								sensitivityData.data = sensitivityData.data.concat(plotted[param.uuid]);
+							}
 						});
 						$(ev.target).removeClass('add-plotted').css({ color: plotted[param.uuid].color });
 					}
@@ -470,7 +477,7 @@ define(['exports', 'jquery', 'd3', 'models/model', 'models/costs', 'models/sensi
 					plotted = {};
 				},
 
-				subscribe: sensitivityData.rx.data.subscribe.bind(sensitivityData.rx.data),
+				subscribe: sensitivityData.rx.data.subscribe.bind(sensitivityData.data),
 			};
 		};
 
