@@ -31,12 +31,14 @@ define(['jquery', 'd3', 'components/ui-component/index', 'moment'], function ($,
 			.sort(function (d) { return d ? -1 : 1 });
 
 		// show the selected option
-		this.$selected.text(this.cfg.selected.name);
+		this.$selected.find('.title').text(this.cfg.selected.name);
+		this.$selected.prop('title', this.cfg.selected.name);
 
 		// listen for changes and trigger custom event
 		this.$el.on('change', '.select-graph', function (ev) {
 			vm.$el.trigger('select:graph', ev.target.value);
-			vm.$selected.text(ev.target.value);
+			vm.$selected.find('.title').text(ev.target.value);
+			vm.$selected.prop('title', ev.target.value);
 		});
 	}
 
@@ -46,6 +48,7 @@ define(['jquery', 'd3', 'components/ui-component/index', 'moment'], function ($,
 	HeaderDropdown.prototype.updateRows = function () {
 		var vm = this;
 		var data = [];
+		data.push({ id: 0, name: '', data: '', time: '' }); // for empty clone
 		this.model.map(function (item) {
 			data.push({
 				id: item.id,
@@ -98,8 +101,9 @@ define(['jquery', 'd3', 'components/ui-component/index', 'moment'], function ($,
 		row.find('[data-col-total]').text(d.name);
 		row.data('id', d.id);
 		row.on('click', function (ev) {
-			vm.$el.trigger('select:graph', {name: d.name,id:d.id});
-			vm.$selected.text(d.name);
+			vm.$el.trigger('select:graph', { name: d.name, id: d.id });
+			vm.$selected.find('.title').text(d.name);
+			vm.$selected.prop('title', d.name);
 		});
 		return row[0];
 	}

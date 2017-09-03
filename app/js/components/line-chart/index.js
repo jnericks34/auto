@@ -149,7 +149,7 @@ define(['jquery', 'd3', 'components/ui-component/index', 'helpers/ui'], function
 					// schedule a line re-draw
 					d.model.rx.subscribe(vm.updateChartLine.bind(this,
 						vm.paths[type],
-						vm.cfg.domains.x
+						vm.cfg.domains.x, vm, params
 					));
 
 					// add/move the holdValue knob
@@ -170,7 +170,7 @@ define(['jquery', 'd3', 'components/ui-component/index', 'helpers/ui'], function
 					// schedule a line re-draw
 					d.model.rx.subscribe(vm.updateChartLine.bind(this,
 						vm.paths[type],
-						vm.cfg.domains.x
+						vm.cfg.domains.x, vm, params
 					));
 
 					// add/move the holdValue knob
@@ -189,7 +189,8 @@ define(['jquery', 'd3', 'components/ui-component/index', 'helpers/ui'], function
 	 * @param  {any} data  Data for the line
 	 * @param  {CostModel} model Provided model to calculate the cost value
 	 */
-	LineChart.prototype.updateChartLine = function (path, data, model) {
+	LineChart.prototype.updateChartLine = function (path, data, vm, params, model) {
+		vm.updateScales(params)
 		d3.select(this)
 			.classed('on-hold', model.holdValue !== undefined && model.selected)
 			.datum(data).attr("d", path(model));
@@ -314,6 +315,36 @@ define(['jquery', 'd3', 'components/ui-component/index', 'helpers/ui'], function
 				.tickSizeOuter(0)
 				.ticks(7)
 				.tickFormat(d3.format(".2s")));
+	}
+
+	/**
+	 * updateScales Update chart's scales
+	 * @param  {array} data The available graph data
+	 */
+	LineChart.prototype.updateScales = function (data) {
+		var range = d3.range(0, 100, 10);
+
+		// calculate minimum y
+		var ymin = (d3.min(this.model.data, function (c) {
+			return d3.min(range, c.model.cost.bind(c.model, 0));
+		}) || 0) * .99;
+
+		// calculate maximum y
+		var ymax = (d3.max(data, function (c) {
+			return d3.max(range, c.model.cost.bind(c.model, 1000));
+		}) || 0) * 1.01;
+
+		// update scale and the axis
+		this.scale.y.domain([ymin, ymax]);
+
+		this.scale.xAxis.call(d3.axisBottom(this.scale.x)
+			.tickSizeOuter(0)
+			.ticks(5));
+
+		this.scale.yAxis.call(d3.axisLeft(this.scale.y)
+			.tickSizeOuter(0)
+			.ticks(7)
+			.tickFormat(d3.format(".2s")));
 	}
 
 	return UiComponent.create(LineChart)

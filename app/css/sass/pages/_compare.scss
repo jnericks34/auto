@@ -30,6 +30,19 @@
 			&:nth-of-type(2n+2) {
 				left: 20px;
 			}
+			.header-dropdown-btn {
+				&:after {
+					margin-left: 0px;
+				}
+				.title{
+					white-space: nowrap;
+					overflow: hidden;
+					text-overflow: ellipsis;
+					max-width: 150px;
+					float: left;
+					padding-right: 15px;
+				}
+			}
 		}
 		.dropdown-content {
 			margin-left: -90px;

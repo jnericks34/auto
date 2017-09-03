@@ -175,7 +175,7 @@
 	font-family: $mainFontBold;
 	.dropdown-content {
 		display: none;
-		position: fixed;
+		position: absolute;
 		z-index: 10;
 		top: 60px;
 		margin: 0;
@@ -183,7 +183,7 @@
 		list-style: none;
 		background: $headerActiveTextColor;
 		text-align: center;	
-
+		min-width: 200px;
 		li {
 			border-bottom: solid 1px #e2e2e2;
 			color: $mainColor;

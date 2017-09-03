@@ -3,12 +3,15 @@ define(['exports', 'jquery', 'd3', 'models/model', 'models/costs', 'models/sensi
 		'use strict';
 		var pageNumber = 1;
 		var isMouseDown = false;
-		document.body.onmousedown = function (evt) {
-			isMouseDown = true;
-		}
-		document.body.onmouseup = function (evt) {
-			isMouseDown = false;
-		}
+		$("body").on({
+			'touchstart mousedown': function (e) {
+				isMouseDown = true;
+			},
+			'touchend mouseup': function (e) {
+				isMouseDown = false;
+			}
+		});
+		
 		var isProcessing = false;
 
 		// list with graph colors

@@ -23,7 +23,7 @@ const parameterConfiguration = jsonfile.readJsonSync('data/parameters.json');
 // prepares the results from output
 function* _prepareResult(isAutomate, parameters) {
   const file = isAutomate ? config.PATHS.AutomateYes : config.PATHS.AutomateNo;
-  const params = _.sortBy(parameters,function(param){return parseInt(param.split(':')[0]);});
+  const params = _.sortBy(parameters, function (param) { return parseInt(param.split(':')[0]); });
   const param = params.join(',')
 
   const output = cp.execFileSync(file, [param], {
@@ -97,7 +97,8 @@ function* _calculateSensitivity(isAutomate, otherParameter, parameterDetail) {
       .first()
       .get('value')
       .value();
-    result.push(dataValue);
+    console.log('value is: ' + dataValue);
+    result.push(_.toNumber(dataValue) || 0);
   }
   return result;
   // generates dummy data for fast visual difference
