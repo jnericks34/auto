@@ -102,6 +102,18 @@
 	}
 	.export-method {
 		text-align: center;
+		input::-webkit-input-placeholder {
+      text-align: center;
+    }
+    input:-moz-placeholder {
+      text-align: center;
+    }
+    input::-moz-placeholder {
+      text-align: center;
+    }
+    input:-ms-input-placeholder {
+      text-align: center;
+    }
 		padding: 40px 0 50px;
 		&:first-of-type {
 			padding-top: 0;

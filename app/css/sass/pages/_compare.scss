@@ -131,16 +131,16 @@
 	.graphs-wrap {
 		position: relative;
 		.graph-btns {
-			position: absolute;
-			right: 30px;
-			bottom: 10px;
 			text-align: right;
+			padding-top: 200px;
+			padding-left: 20px;
+			clear:both;
 			a {
 				display: block;
 				line-height: 35px;
 				color: $headerTextColor;
 				transition: color .2s ease;
-				&:hover {
+				&:hover {		  position: relative;
 					opacity: 1;
 					color: $headerActiveTextColor;
 					.icon-pdf {

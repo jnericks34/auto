@@ -87,7 +87,7 @@
 		}
 		.close {
 			margin-top: -1px;
-			margin-left: 15px;
+			margin-right: 5px;
 			font-size: 11px;
 		}
 		&.active {
@@ -331,7 +331,9 @@
 				opacity: .5;
 				transition: opacity .2s ease;
 				color: $mainColor;
-				margin-left: 30px;
+				margin-top: 23px;
+				margin-left: 10px;
+				float: right;
 				&:hover {
 					opacity: 1;
 					color: inherit;

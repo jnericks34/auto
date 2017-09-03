@@ -47,10 +47,10 @@ let transporter = nodemailer.createTransport({
 });
 
 /**
- * Gets all scenarios
+ * Gets top N scenarios
  */
 function* getAll() {
-  return yield Scenario.findAll({ order: [['id', 'DESC']] });
+  return yield Scenario.findAll({ order: [['id', 'DESC']] , limit:config.TOP_N_PARAM});
 }
 
 /**

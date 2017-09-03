@@ -199,7 +199,7 @@ define(['exports', 'pdfmake', 'd3', 'jquery', 'saveSvgAsPng', 'canvg', 'moment']
           // update the content
           docDefinition.content = content;
           var pdfDoc = pdfMake.createPdf(docDefinition);
-          deferred.resolve({document:pdfDoc,fileName})
+          deferred.resolve({document:pdfDoc,fileName:fileName})
         });
     });
     return deferred.promise();

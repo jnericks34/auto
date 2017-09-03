@@ -17,6 +17,7 @@
 	} // general tables style
 	[data-tables] {
 		width: 420px;
+		max-height: 400px;
 	}
 	th {
 		font-size: 13px;
@@ -130,6 +131,7 @@
 .top-area-content {
 	min-height: 312px;
 	align-items: stretch;
+	overflow: auto;
 }
 
 @media screen and (max-width: $tView) {
