@@ -70,6 +70,10 @@ define(['jquery', 'd3', 'components/ui-component/index', 'components/toggle-inpu
 		if (this.model.value > this.model.max) {
 			this.model.value = this.model.max;
 		}
+		if (this.model.value.length == 0 || this.model.value < this.model.min) {
+			this.model.value = this.model.min;
+		}
+
 		if (this.model.holdValue !== undefined && this.model.holdValue !== this.model.value) {
 			this.$el.addClass('hold-state');
 			$('[data-target="' + this.model.name + '"]').addClass('hold-common');
