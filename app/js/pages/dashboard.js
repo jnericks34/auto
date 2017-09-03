@@ -84,6 +84,7 @@ define(['jquery', 'helpers/data', 'helpers/ui', 'lodash', 'Api', 'helpers/pdfHel
 						$("newScenarioName").val('');
 						state.graphs.push(result);
 						addTabsMenu([result]);
+						ui.initModals($container);
 						$(".save-scenario-modal").find('.toggle-modal').trigger('click');
 					});
 				} else {
@@ -284,8 +285,6 @@ define(['jquery', 'helpers/data', 'helpers/ui', 'lodash', 'Api', 'helpers/pdfHel
 		});
 		$(".header-wrap .tabs-content .add-tab").before(graphMenuHtml);
 	}
-
-
 
 	ui.initModals($container).then(function (graphs) {
 		// show the graph
