@@ -375,6 +375,7 @@ define(['exports', 'jquery', 'd3', 'models/model', 'models/costs', 'models/sensi
 			 * @return {any} Returns method to reInit the graph and subscribe to model changes
 			 */
 		exports.appendSensitivityTable = function ($cEl, paramList) {
+			$cEl.find('[data-sensitivity-graph]').html('');
 			// create data model
 			var sensitivityData = new Model({ data: [], changedCount: 0, activeId: [] });
 
