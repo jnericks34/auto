@@ -184,7 +184,7 @@ define(['jquery', 'helpers/data', 'helpers/ui', 'components/components', 'helper
 				graph1Id = graph1.id;
 			}
 			var graph2Id = 0;
-			if (graph2Id) {
+			if (graph2) {
 				graph2Id = graph2.id;
 			}
 

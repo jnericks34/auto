@@ -1,8 +1,8 @@
 define(['jquery'], function ($) {
   'use strict';
-
   var api = {
     baseUrl: "http://localhost:3000/v1",
+    errorAlertTimeout: false,
     makeAjaxRequest: function (options) {
       var deferred = $.Deferred();
 
@@ -18,9 +18,15 @@ define(['jquery'], function ($) {
       });
 
       request.fail(function (data, textStatus, jqXHR) {
+        if (!api.errorAlertTimeout && data.readyState < 4) {
+          setTimeout(function () {
+            api.errorAlertTimeout = false;
+          }, 500);
+          api.errorAlertTimeout = true;
+          alert("An error occurred while processing your requests.");
+        }
         deferred.reject(data, textStatus, jqXHR);
       });
-
       return deferred.promise();
     },
     get: function (url, data) {

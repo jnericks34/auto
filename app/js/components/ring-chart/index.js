@@ -111,7 +111,7 @@ define(['jquery', 'components/ui-component/index', 'd3'], function ($, UiCompone
 			.style('fill', '#ffd900')
 			.attr('dx', '9');
 
-		this.text.attr('y', '-5');
+		this.text.attr('y', '-5').attr('dy', 7);
 	}
 
 	/**
@@ -122,7 +122,7 @@ define(['jquery', 'components/ui-component/index', 'd3'], function ($, UiCompone
 		this.deltaIndicator.remove();
 		this.deltaTextsWrap.remove();
 		this.deltaText = undefined;
-		this.text.attr('y', '0');
+		this.text.attr('y', '0').attr('dy', 9);
 	}
 
 	/**
@@ -187,10 +187,9 @@ define(['jquery', 'components/ui-component/index', 'd3'], function ($, UiCompone
 			this.texts = svg.append("g")
 				.attr("transform", translate)
 				.style("text-anchor", "middle")
-				.style("dominant-baseline", "middle")
 				.attr('class', 'values');
 
-			this.text = this.texts.append("text").attr('class', 'cvalue').style("font-size", "24px").style('fill','#fff');
+			this.text = this.texts.append("text").attr('class', 'cvalue').style("font-size", "24px").style('fill','#fff').attr('dy', 9);
 
 			this.__svg = svg.append("g")
 				.attr("transform", translate);

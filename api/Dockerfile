@@ -22,6 +22,8 @@ COPY . .
 
 RUN chmod +x exe/*
 
+RUN chmod +x wait-for-it.sh
+
 RUN chown -R $USER_NAME .
 
 USER $USER_NAME

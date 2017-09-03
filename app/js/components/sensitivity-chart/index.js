@@ -1,6 +1,10 @@
 define(['jquery', 'd3', 'components/ui-component/index', 'models/sensitivity'], function ($, d3, UiComponent, SensitivityParam) {
 	'use strict';
-
+	d3.selection.prototype.moveToFront = function () {
+		return this.each(function () {
+			this.parentNode.appendChild(this);
+		});
+	};
 	function SensitivityChart(model, $el) {
 		this.templateUrl = 'js/components/sensitivity-chart/template.html';
 		this.elems = { 'chartEl': '.sensitivity-chart-el' };
@@ -61,6 +65,7 @@ define(['jquery', 'd3', 'components/ui-component/index', 'models/sensitivity'], 
 			.append('path')
 			.attr('class', 'area')
 			.attr('stroke', 'none')
+			.attr('opacity', 0.2)
 			.attr('fill', function (d) { return d.color || 'steelblue' })
 			.attr('id', function (d) { return d.model.uuid })
 			.merge(areas)
@@ -85,6 +90,8 @@ define(['jquery', 'd3', 'components/ui-component/index', 'models/sensitivity'], 
 			return function (d) { vm[fn].bind(vm, d3.select(this)).apply(vm, arguments) };
 		};
 
+		handlers.moveToFront();
+
 		handlers.enter()
 			.append('rect')
 			.attr("rx", 5)
@@ -95,7 +102,9 @@ define(['jquery', 'd3', 'components/ui-component/index', 'models/sensitivity'], 
 			.attr('stroke-width', 2)
 			.attr('fill', function (d) { return d.color })
 			.attr('transform', 'translate(-7.5,-7.5)')
+			.style('cursor', 'pointer')
 			.merge(handlers)
+			.on('touchstart', wrap('onMousedown'))
 			.on('mousedown', wrap('onMousedown'))
 			.each(function (d) {
 				d.model.rx.value.subscribe(
@@ -119,8 +128,8 @@ define(['jquery', 'd3', 'components/ui-component/index', 'models/sensitivity'], 
 		}.bind(this);
 
 		var onmouseUp = function () {
-			d3.select(window).on('mousemove', null);
-			d3.select(window).on('mouseup', null);
+			d3.select(window).on('mousemove touchmove', null);
+			d3.select(window).on('mouseup touchend', null);
 			window.isMouseDown = false;
 			update();
 		}.bind(this);
@@ -130,8 +139,8 @@ define(['jquery', 'd3', 'components/ui-component/index', 'models/sensitivity'], 
 			d3.event.stopPropagation();
 		}
 
-		d3.select(window).on('mousemove', update);
-		d3.select(window).on('mouseup', onmouseUp);
+		d3.select(window).on('mousemove touchmove', update);
+		d3.select(window).on('mouseup touchend', onmouseUp);
 		update();
 
 	}
@@ -226,12 +235,12 @@ define(['jquery', 'd3', 'components/ui-component/index', 'models/sensitivity'], 
 
 		// calculate minimum y
 		var ymin = (d3.min(this.model.data, function (c) {
-			return d3.min(range, c.model.sensitivity.bind(c.model));
-		}) || 0) * .99;
+			return d3.min(c.model.sensitivityArray);
+		}) || 0) * 0.99;
 
 		// calculate maximum y
 		var ymax = (d3.max(data, function (c) {
-			return d3.max(range, c.model.sensitivity.bind(c.model));
+			return d3.max(c.model.sensitivityArray);
 		}) || 0) * 1.01;
 
 		// update scale and the axis

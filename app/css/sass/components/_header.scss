@@ -87,7 +87,7 @@
 		}
 		.close {
 			margin-top: -1px;
-			margin-right: 5px;
+			margin-left: 15px;
 			font-size: 11px;
 		}
 		&.active {
@@ -111,6 +111,7 @@
 			vertical-align: middle;
 			width: 25px;
 			height: 25px;
+			margin: 0 30px;
 			border: solid 2px $headerTextColor;
 		} 
 		>* {
@@ -173,7 +174,6 @@
 	position: relative;
 	display:  inline-block;
 	font-family: $mainFontBold;
-
 	.dropdown-content {
 		display: none;
 		position: absolute;
@@ -184,8 +184,8 @@
 		padding: 0;
 		list-style: none;
 		background: $headerActiveTextColor;
-		text-align: center;
-
+		text-align: center;	
+		min-width: 200px;
 		li {
 			border-bottom: solid 1px #e2e2e2;
 			color: $mainColor;
