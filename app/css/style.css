@@ -454,6 +454,55 @@ input:not([type="range"]):-moz-placeholder {
 .header-wrap .tabs {
   position: relative;
 }
+.header-wrap .tabs.dropdown .tab-action-btn {
+  display: inline-block;
+}
+.header-wrap .tabs.dropdown .tabs-content {
+  display: none;
+  position: absolute;
+  background: #fff;
+  text-align: center;
+  position: fixed;
+  z-index: 10;
+  top: 60px;
+  color: #40a0ff;
+  overflow-y: scroll;
+  height: 90vh;
+}
+.header-wrap .tabs.dropdown .tabs-content .tab {
+  display: block;
+  border-bottom: solid 1px #e2e2e2;
+  text-transform: uppercase;
+  padding: 0 20px;
+}
+.header-wrap .tabs.dropdown.active .tab-action-btn {
+  position: relative;
+  z-index: 15;
+  background: #639eb4;
+  color: white;
+  height: 30px;
+  margin: 0;
+  padding: 0 15px;
+  line-height: 28px;
+  border-radius: 15px;
+  border: none;
+}
+.header-wrap .tabs.dropdown.active:before {
+  content: '';
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 10;
+}
+.header-wrap .tabs.dropdown.active .tabs-content {
+  display: block;
+}
+.header-wrap .tabs.dropdown.active .tabs-content .tab.active .title {
+  color: #40a0ff;
+}
 .header-wrap .tab-action-btn {
   display: none;
   vertical-align: middle;
@@ -1213,10 +1262,10 @@ input[type="range"]::-ms-fill-upper {
 .line-chart-el .domain {
   stroke: rgba(255, 255, 255, 0.5);
 }
-/* .line-chart-el svg .line, .line-chart-el svg .hline {
+.line-chart-el svg .line, .line-chart-el svg .hline {
   fill: none;
   stroke-width: 2px;
-} */
+}
 .line-chart-el svg .hline {
   stroke: #ffd900;
 }
@@ -1244,10 +1293,10 @@ input[type="range"]::-ms-fill-upper {
   stroke: #59a2b6;
 }
 
-/* .area {
+.area {
   opacity: .25;
   stroke: none;
-} */
+}
 
 .ring-chart-el .values {
   text-anchor: middle;

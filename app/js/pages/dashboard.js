@@ -131,6 +131,17 @@ define(['jquery', 'helpers/data', 'helpers/ui', 'lodash', 'Api', 'helpers/pdfHel
 		}
 	}
 
+	function checkTabsWidth() {
+		var width = 0;
+		$('.tab').each(function() {
+				width += $(this).outerWidth( true );
+		});
+		if (width > 900) {
+			$('.tabs').addClass('dropdown');
+		} else {
+			$('.tabs').removeClass('dropdown');
+		}
+	}
 	// action for hide the sensitivity graph 
 	$container.find('[data-toggle-sgraph]').bind('click', function () {
 		$('.selected-state').removeClass('selected-state');
@@ -174,6 +185,7 @@ define(['jquery', 'helpers/data', 'helpers/ui', 'lodash', 'Api', 'helpers/pdfHel
 				showGraph(state, 0);
 			}
 		}
+		checkTabsWidth();
 	});
 	$(document).on('click', '[data-add-graph]', function () {
 		var newId = 0;
@@ -185,6 +197,7 @@ define(['jquery', 'helpers/data', 'helpers/ui', 'lodash', 'Api', 'helpers/pdfHel
 		addTabsMenu([graph]);
 		$('.add-new-graph .toggle-modal').find('.icon-close').trigger('click');
 		$(".tab[data-select-graph='" + newId + "']").trigger('click');
+		checkTabsWidth();
 	});
 
 	$(document).on('click', '[data-delete-scenario]', function (ev) {
@@ -213,6 +226,7 @@ define(['jquery', 'helpers/data', 'helpers/ui', 'lodash', 'Api', 'helpers/pdfHel
 	$(document).on('click', '[data-add-graph-scneario]', function () {
 		var id = $(this).closest('tr').data('id');
 		showGraph(state, id);
+		checkTabsWidth();
 	});
 
 	$(document).on('click', '.saveScenario', function () {
@@ -293,6 +307,7 @@ define(['jquery', 'helpers/data', 'helpers/ui', 'lodash', 'Api', 'helpers/pdfHel
 			state.graphs = graphs;
 			addTabsMenu(graphs);
 			showGraph(state, graphs[0].id); // load first graph
+			checkTabsWidth();
 		} else {
 			// load default
 			state.graphs=[];
