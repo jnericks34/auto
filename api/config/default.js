@@ -27,6 +27,5 @@ module.exports = {
   DATABASE_SSL: 0==process.env.DATABASE_SSL?false: true,
   SMTP_HOST: process.env.SMTP_HOST || 'smtp.gmail.com',
   SMTP_USERNAME: process.env.SMTP_USERNAME || 'test_account',
-  SMTP_PASSWORD: process.env.SMTP_PASSWORD || 'test_password',
-  TOP_N_PARAM: 5
+  SMTP_PASSWORD: process.env.SMTP_PASSWORD || 'test_password'
 };
