@@ -302,7 +302,7 @@ define(['jquery', 'd3', 'components/ui-component/index', 'helpers/ui'], function
 	LineChart.prototype.updateScaleDomains = function (width, height) {
 		// set scale domains
 		this.scale.x.domain(d3.extent([0, d3.max(this.cfg.domains.x)]));
-		this.scale.y.domain([0, this.model.maxCosts * 1.01]);
+		this.scale.y.domain([0, this.model.maxCosts * 1.5]);
 
 		// update the axis with domain data
 		this.scale.xAxis.attr('transform', 'translate(10, ' + height + ')')
@@ -332,7 +332,14 @@ define(['jquery', 'd3', 'components/ui-component/index', 'helpers/ui'], function
 		// calculate maximum y
 		var ymax = (d3.max(data, function (c) {
 			return d3.max(range, c.model.cost.bind(c.model, 1000));
-		}) || 0) * 1.01;
+		}) || 0);
+
+		if (this.previousMax > 0 && ymax < this.previousMax && (ymax * 1.5) > this.previousMax) {
+			return;
+		}
+		ymax = ymax * 1.5;
+
+		this.previousMax = ymax;
 
 		// update scale and the axis
 		this.scale.y.domain([ymin, ymax]);
