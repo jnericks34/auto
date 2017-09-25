@@ -1,8 +1,15 @@
-var static = require('node-static');
-var file = new static.Server();
-console.log("Serving on Port 8080");
-require('http').createServer(function(request, response) {
-  request.addListener('end', function() {
-    file.serve(request, response);
-  }).resume();
-}).listen(process.env.PORT || 8080);
+const express = require('express');
+const bodyParser = require('body-parser');
+
+const app = express();
+
+app.use(bodyParser.json({limit:'50mb'}));
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(express.static('.'))
+
+app.get('/apiUrl', function(req, res){
+  res.send({'apiUrl':process.env.API_URL});
+});
+
+app.listen(process.env.PORT || 8080);

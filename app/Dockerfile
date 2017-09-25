@@ -35,4 +35,4 @@ USER $USER_NAME
 EXPOSE 8080
 
 # Serve the app
-CMD ["http-server"]
+CMD ["npm","start"]

@@ -1,10 +1,23 @@
 define(['jquery'], function ($) {
   'use strict';
   var api = {
-    baseUrl: "http://localhost:3000/v1",
+    baseUrl: null,
     errorAlertTimeout: false,
     makeAjaxRequest: function (options) {
       var deferred = $.Deferred();
+
+      if (api.baseUrl==null){
+        var urlRequest = $.get('apiUrl',function(data){
+          api.baseUrl = data.apiUrl;
+          api.doMakeAjaxRequest(options,deferred);
+        });
+      } else {
+        api.doMakeAjaxRequest(options,deferred);
+      }
+      return deferred.promise();
+
+    },
+    doMakeAjaxRequest: function(options,deferred){
 
       if (options.url.indexOf("http") !== 0) {
         options.url = api.baseUrl + options.url;
@@ -27,7 +40,6 @@ define(['jquery'], function ($) {
         }
         deferred.reject(data, textStatus, jqXHR);
       });
-      return deferred.promise();
     },
     get: function (url, data) {
       return api.makeAjaxRequest({ url: url, method: 'GET', data: data, dataType: 'json' });

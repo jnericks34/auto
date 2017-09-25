@@ -18,6 +18,8 @@ services:
     build: app
     ports:
       - 8080:8080
+    environment:
+        API_URL: http://localhost:3000/v1
   postgres:
     image: postgres
     expose:
