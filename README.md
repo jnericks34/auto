@@ -70,3 +70,7 @@ sudo docker-compose up --build --force-recreate
 ```
 App should be ready to use on http://localhost:8080
 
+You can also use prebuilt images from Gitlab registry (you cant change parameter labals/default values in this case). To do that, in docker-compose.yml replace `build: api` with `image: registry.gitlab.com/bermuda-automotive-dashboard/automotive-dashboard/api` and `build: app` with `image: registry.gitlab.com/bermuda-automotive-dashboard/automotive-dashboard/app` 
+
+Login to the gitlab registry with `docker login registry.gitlab.com` and then you can just run `docker-compose up` to start the application.
+
