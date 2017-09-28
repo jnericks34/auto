@@ -46,6 +46,7 @@ define(['jquery', 'd3', 'components/ui-component/index', 'components/toggle-inpu
 			case 'toggle':
 				(new Toggle({ model: this.model })).mount(this.inputWrap);
 				this.$input.hide();
+				this.plotBtn.hide();
 				break;
 		}
 

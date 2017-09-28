@@ -25,7 +25,7 @@ define(['jquery', 'helpers/data', 'helpers/ui', 'lodash', 'Api', 'helpers/pdfHel
 	};
 
 	// create the sensitivity table
-	var sensitivityTable
+	var sensitivityTable;
 	function showGraph(state, graphId) {
 		graphId = parseInt(graphId, 10);
 		state.activeGraphId = graphId;
@@ -84,10 +84,11 @@ define(['jquery', 'helpers/data', 'helpers/ui', 'lodash', 'Api', 'helpers/pdfHel
 					Api.createScenario(scenario).then(function (result) {
 						alert('Scenario saved successfully');
 						state.graphs.push(result);
-						$(".tabs-content .tab.active").data('selectGraph', result.id);
+						$(".tabs-content .tab.active").attr('data-select-graph', result.id+"");
 						$(".tabs-content .tab.active").find('.title').text(result.name);
 						ui.initModals($container);
 						$(".save-scenario-modal").find('.toggle-modal').trigger('click');
+						showGraph(state,result.id);
 					});
 				} else {
 					Api.updateScenario(state.activeGraphId, scenario).then(function () {
@@ -142,7 +143,7 @@ define(['jquery', 'helpers/data', 'helpers/ui', 'lodash', 'Api', 'helpers/pdfHel
 	}
 
 	function checkTabsWidth() {
-		if (state.graphs.length>4){
+		if ($(".header-wrap .tabs-content").children().length>4){
 			$('.tabs').addClass('dropdown');
 		}else{
 			$('.tabs').removeClass('dropdown');
@@ -156,7 +157,8 @@ define(['jquery', 'helpers/data', 'helpers/ui', 'lodash', 'Api', 'helpers/pdfHel
 
 	// bind restore data actions
 	$container.find('[data-restore-data]').bind('click', function () {
-		showGraph(state, 0);
+		$('.selected-state').removeClass('selected-state');
+		showGraph(state, state.activeGraphId);
 	});
 
 	// bind the graph selector actions

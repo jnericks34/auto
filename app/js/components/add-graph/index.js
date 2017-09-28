@@ -23,6 +23,7 @@ define(['jquery', 'd3', 'components/ui-component/index', 'moment'], function ($,
 		this.$rowsWrap.empty();
 		// trigger rows update
 		this.updateRows();
+		this.model.rx.subscribe(this.updateRows.bind(this));
 	}
 
 	/**
@@ -30,7 +31,7 @@ define(['jquery', 'd3', 'components/ui-component/index', 'moment'], function ($,
 	 */
 	AddGraphModal.prototype.updateRows = function () {
 		var graphs = [];
-		this.model.map(function (item) {
+		this.model.data.map(function (item) {
 			graphs.push({
 				id: item.id,
 				name: item.name,
@@ -41,11 +42,13 @@ define(['jquery', 'd3', 'components/ui-component/index', 'moment'], function ($,
 
 		var loadRows = d3.select(this.$rowsWrap[0])
 			.selectAll('tr.load-row')
-			.data(graphs);
-
-		loadRows.enter().append(this.loadRowTpl.bind(this));
+			.data(graphs,function(d){return d.id;});
 
 		loadRows.exit().remove();
+		loadRows.enter().append(this.loadRowTpl.bind(this));
+
+
+		
 	}
 
 	/**

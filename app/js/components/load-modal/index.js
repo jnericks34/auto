@@ -19,13 +19,15 @@ define(['jquery', 'd3', 'components/ui-component/index', 'moment', 'Api'], funct
 	}
 
 	LoadModal.prototype.render = function () {
-		this.$rowsWrap.empty();
+		
 		this.updateRows();
+		this.model.rx.subscribe(this.updateRows.bind(this));
 	}
 
 	LoadModal.prototype.updateRows = function () {
+		this.$rowsWrap.empty();
 		var data = [];
-		this.model.map(function (item) {
+		this.model.data.map(function (item) {
 			data.push({
 				id: item.id,
 				name: item.name,
@@ -35,11 +37,12 @@ define(['jquery', 'd3', 'components/ui-component/index', 'moment', 'Api'], funct
 		});
 		var graphRows = d3.select(this.$rowsWrap[0])
 			.selectAll('tr.load-row')
-			.data(data);
-
-		graphRows.enter().append(this.rowTpl.bind(this));
+			.data(data,function(d){return d.id;});
 
 		graphRows.exit().remove();
+		graphRows.enter().append(this.rowTpl.bind(this));
+
+		
 	}
 
 	/**

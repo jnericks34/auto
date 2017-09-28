@@ -24,6 +24,11 @@ define(['exports', 'jquery', 'd3', 'models/model', 'models/costs', 'models/sensi
 			wiring: '#9dc8d4',
 		};
 
+		var addModal=null;
+		var loadModal=null;
+		var saveModal=null;
+		var exportModal=null;
+
 		exports.setPageNumber = function (number) {
 			pageNumber = number;
 		}
@@ -213,11 +218,18 @@ define(['exports', 'jquery', 'd3', 'models/model', 'models/costs', 'models/sensi
 			if (sum === arraySum) {
 				return array; // end recursion: solution found
 			}
-			var reduced = array.reduce(function (c, a, i) { return c + (i === index ? 0 : arraySum > sum ? a < maxValue : a > minValue) }, 0);
-			var adjust = (arraySum - sum) / reduced;
-
-			// apply adjustment, but without getting out of range, and then recurse
-			return reMapArray(array.map(function (a, i) { return i === index ? a : Math.max(minValue, Math.min(maxValue, Math.round(a + adjust))) }), index, minValue, maxValue, arraySum);
+			var diff = sum>arraySum?-1:1;
+			var currInd=0;
+			while (sum!= arraySum){
+				if (currInd==index){
+					currInd = (currInd+1)%array.length;
+					continue;	
+				}
+				array[currInd] = Math.max(minValue,Math.min(maxValue,array[currInd]+diff));
+				currInd = (currInd+1)%array.length;
+				sum = _.sum(array);
+			}
+			return array;
 		}
 
 		function checkIfTacticalSum100($cEl, list, item, v) {
@@ -430,7 +442,7 @@ define(['exports', 'jquery', 'd3', 'models/model', 'models/costs', 'models/sensi
 			// keep track of the plotted models
 			var plotted = {};
 			// watch for plot events and add the model to graph
-			$cEl.bind('plot:sensitivity', function (ev, param) {
+			$cEl.off('plot:sensitivity').on('plot:sensitivity', function (ev, param) {
 				var parameters = _.chain(paramList.arr).map(function (item) {
 					return {
 						parameterIndex: item.parameterIndex,
@@ -449,7 +461,7 @@ define(['exports', 'jquery', 'd3', 'models/model', 'models/costs', 'models/sensi
 				// check if model is currently plotted
 				var isPlotted = sensitivityData.data.filter(function (p) {
 					return p.model._uuid === param.uuid;
-				})[0];
+				}).length>0;
 
 				if (isPlotted) {
 					sensitivityData.activeId = sensitivityData.activeId.filter(function (p) {
@@ -472,12 +484,12 @@ define(['exports', 'jquery', 'd3', 'models/model', 'models/costs', 'models/sensi
 					}
 				}
 				// add/remove a selectedState to the element that triggered the event
-				$(ev.target).toggleClass('selected-state', isPlotted);
+				$(ev.target).toggleClass('selected-state', !isPlotted);
 			});
 
 			return {
 				reInit: function (data) {
-					sensitivityData.data = [];
+					sensitivityData.set('data',[]);
 					plotted = {};
 				},
 
@@ -491,14 +503,31 @@ define(['exports', 'jquery', 'd3', 'models/model', 'models/costs', 'models/sensi
 		 * @return {jqueryDeferred} 	Resolves when all modals have been attached
 		 */
 		exports.initModals = function ($cEl) {
+			var that=this;
 			return Api.getAllScenarios().then(function (response) {
 
-				(new comp.AddGraphModal({ model: response })).mount($cEl[0]);
-				(new comp.LoadModal({ model: response })).mount($cEl[0]);
+				if (!that.addModal){
+					that.addModal = (new comp.AddGraphModal({ model: new Model({data:response})}));
+					that.addModal.mount($cEl[0]);
+				} else {
+					that.addModal.model.set('data',response);
+				}
+
+				if (!that.loadModal){
+					that.loadModal = (new comp.LoadModal({ model: new Model({data:response})}));
+					that.loadModal.mount($cEl[0]);
+				}
+				else{
+					that.loadModal.model.set('data',response);
+				}
 
 				var path = '/js/components/modals/';
-				(new comp.Modals({ templateUrl: path + 'save-scenario.html' })).mount($cEl[0]);
-				(new comp.Modals({ templateUrl: path + 'export-pdf.html' })).mount($cEl[0]);
+				if (!that.saveModal){
+					that.saveModal = (new comp.Modals({ templateUrl: path + 'save-scenario.html' })).mount($cEl[0]);
+				}
+				if (!that.exportModal){
+					that.exportModal = (new comp.Modals({ templateUrl: path + 'export-pdf.html' })).mount($cEl[0]);
+				}
 
 				return response;
 			});

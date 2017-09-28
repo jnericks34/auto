@@ -75,7 +75,7 @@ define(['jquery', 'components/ui-component/index', 'd3'], function ($, UiCompone
 			if (hv !== undefined) {
 				!this.deltaText && this.showDeltaValues();
 
-				this.deltaText.text(fm(value - holdValue));
+				this.deltaText.text((value-holdValue)?fm(value - holdValue):'0.0%');
 
 				// update the tick that indicates the holdValue's position
 				var rotation = this.toRad(holdValue, this.domain);

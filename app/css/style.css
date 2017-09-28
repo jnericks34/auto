@@ -470,7 +470,8 @@ input:not([type="range"]):-moz-placeholder {
   top: 60px;
   color: #40a0ff;
   overflow-y: scroll;
-  height: 90vh;
+  max-height:500px;
+  /*height: 90vh;*/
 }
 .header-wrap .tabs.dropdown .tabs-content .tab {
   display: block;
@@ -546,9 +547,16 @@ input:not([type="range"]):-moz-placeholder {
 .header-wrap .tab .close:hover {
   color: #fff;
 }
+
+.header-wrap .tabs.dropdown .title:hover,
+.header-wrap .tabs.dropdown .close:hover {
+  color: #80c0ff;
+}
+
 .header-wrap .tab .close {
   margin-top: -1px;
   margin-right: 5px;
+  margin-left: 10px;
   font-size: 11px;
 }
 .header-wrap .tab.active {
@@ -571,7 +579,7 @@ input:not([type="range"]):-moz-placeholder {
   vertical-align: middle;
   width: 25px;
   height: 25px;
-  margin: 0 30px;
+  margin: 20px 30px;
   border: solid 2px #95bcc7;
 }
 .header-wrap .add-tab > * {
@@ -581,6 +589,12 @@ input:not([type="range"]):-moz-placeholder {
   color: #fff;
   border-color: #fff;
 }
+
+.header-wrap .tabs.dropdown .add-tab:hover > * {
+  color: #80c0ff;
+  border-color: #80c0ff;
+}
+
 .header-wrap .action-btns {
   margin-left: auto;
 }
@@ -674,6 +688,7 @@ input:not([type="range"]):-moz-placeholder {
   display: inline-block;
   height: 30px;
   max-width: 250px;
+  min-width: 200px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -1171,7 +1186,7 @@ input[type="range"]::-ms-fill-upper {
   align-items: center;
 }
 .editable-item-wrap input:not([type="range"]) {
-  width: 60px;
+  width: 70px;
   padding: 0 5px;
   height: 25px;
   line-height: 25px;
@@ -1185,7 +1200,7 @@ input[type="range"]::-ms-fill-upper {
   color: #666666;
 }
 .editable-item-wrap .chart-col {
-  width: 95px;
+  width: 105px;
 }
 .editable-item-wrap .slider-col {
   width: calc(66.66% - 95px);
@@ -1773,7 +1788,7 @@ input[type="range"]::-ms-fill-upper {
 }
 .compare-page .top-area .graphs-wrap {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
 }
 .compare-page .top-area .graphs-wrap:nth-of-type(2n+1) {
   padding-right: 50px;
@@ -1805,7 +1820,7 @@ input[type="range"]::-ms-fill-upper {
 .compare-page .graphs-wrap .graph-btns {
   text-align: right;
   padding-top: 200px;
-  padding-left: 20px;
+  padding-left: 0px;
   clear: both;
 }
 .compare-page .graphs-wrap .graph-btns a {
@@ -1870,8 +1885,8 @@ input[type="range"]::-ms-fill-upper {
 }
 
 @media screen and (max-width: 1360px) {
-  .compare-page .top-area .graphs-wrap .ring-chart,
-  .compare-page .top-area .graphs-wrap .line-chart-el {
+  .compare-page .top-area .graphs-wrap>div:nth-child(0),
+  .compare-page .top-area .graphs-wrap>div:nth-child(1) {
     transform: scale(0.8);
   }
   .compare-page .top-area .graphs-wrap .ring-chart {
