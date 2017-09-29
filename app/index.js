@@ -9,7 +9,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('.'))
 
 app.get('/apiUrl', function(req, res){
-  res.send({'apiUrl':process.env.API_URL});
+  res.send({'apiUrl':process.env.API_HOSTNAME,
+			'apiPort':process.env.API_PORT});
 });
 
 app.listen(process.env.PORT || 8080);

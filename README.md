@@ -30,12 +30,20 @@ Start the docker deamon
 
 ## Docker configuration
 In the docker-compose.yml file you can configure these parameters:
+
 	SMTP_HOST: 'smtp.gmail.com' (The smtp server url that will be used to send emails)
+
     SMTP_USERNAME: 'username' (The smtp username)
+
     SMTP_PASSWORD: 'password' The smtp password)
+
     api port: 3000:3000 (change only the second number)
-    app port: 8080:8080 (change only the second number
-    API_URL: http://localhost:3000/v1 (replace localhost with hostname of the machine that is running the api, replace port with api port set above)
+
+    app port: 8080:8080 (change only the second number)
+
+    API_HOSTNAME:  (leave it empty if running api and frontend on the same machine. otherwise set it to hostname of the machine that is running the api)
+    
+    API_PORT: 3000 (replace it with api port set above)
 
     Database configurations does not need to change, db is accessible only to the api container.
 

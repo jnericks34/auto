@@ -8,7 +8,11 @@ define(['jquery'], function ($) {
 
       if (api.baseUrl==null){
         var urlRequest = $.get('apiUrl',function(data){
-          api.baseUrl = data.apiUrl;
+          if (!data.apiUrl){
+            api.baseUrl = $(location).attr('protocol')+"//"+$(location).attr('hostname')+":"+data.apiPort+'/v1';
+          }else{
+            api.baseUrl = $(location).attr('protocol')+"//"+data.apiUrl+":"+data.apiPort+'/v1';  
+          }          
           api.doMakeAjaxRequest(options,deferred);
         });
       } else {
